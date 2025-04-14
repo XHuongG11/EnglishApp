@@ -9,10 +9,10 @@ public class User {
     private String password;
 
     //reference
-    private List<TuVungHocTap> tuvunghoctap;
+    private List<LearningVocab> tuvunghoctap;
     private LearningProcess tiendohoctap;
 
-    public User(Long id, String username, String email, String password, List<TuVungHocTap> tuvunghoctap, LearningProcess tiendohoctap) {
+    public User(Long id, String username, String email, String password, List<LearningVocab> tuvunghoctap, LearningProcess tiendohoctap) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -57,11 +57,11 @@ public class User {
         this.password = password;
     }
 
-    public List<TuVungHocTap> getTuvunghoctap() {
+    public List<LearningVocab> getTuvunghoctap() {
         return tuvunghoctap;
     }
 
-    public void setTuvunghoctap(List<TuVungHocTap> tuvunghoctap) {
+    public void setTuvunghoctap(List<LearningVocab> tuvunghoctap) {
         this.tuvunghoctap = tuvunghoctap;
     }
 

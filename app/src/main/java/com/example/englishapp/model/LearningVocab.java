@@ -1,17 +1,17 @@
 package com.example.englishapp.model;
 
-public class TuVungHocTap {
+public class LearningVocab {
     private Long id;
     private User user;
     private Word word;
 
-    public TuVungHocTap(Word word, User user, Long id) {
+    public LearningVocab(Word word, User user, Long id) {
         this.word = word;
         this.user = user;
         this.id = id;
     }
 
-    public TuVungHocTap() {
+    public LearningVocab() {
     }
 
     public Long getId() {

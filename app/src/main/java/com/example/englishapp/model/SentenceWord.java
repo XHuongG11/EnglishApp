@@ -2,7 +2,7 @@ package com.example.englishapp.model;
 
 public class SentenceWord {
     private Long id;
-    private Sentence sentence;
+    private Question sentence;
     private Word word;
 
     public SentenceWord() {
@@ -16,11 +16,11 @@ public class SentenceWord {
         this.id = id;
     }
 
-    public Sentence getSentence() {
+    public Question getSentence() {
         return sentence;
     }
 
-    public void setSentence(Sentence sentence) {
+    public void setSentence(Question sentence) {
         this.sentence = sentence;
     }
 

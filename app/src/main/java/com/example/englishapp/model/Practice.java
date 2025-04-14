@@ -8,7 +8,7 @@ public class Practice {
     private EPracticeType type;
 
     private Topic topic;
-    private List<Sentence> questions;
+    private List<Question> questions;
 
     // constructor, getter, setter
 
@@ -16,7 +16,7 @@ public class Practice {
         questions = new ArrayList<>();
     }
 
-    public Practice(Long id, EPracticeType type, Topic topic, List<Sentence> questions) {
+    public Practice(Long id, EPracticeType type, Topic topic, List<Question> questions) {
         this.id = id;
         this.type = type;
         this.topic = topic;
@@ -36,7 +36,7 @@ public class Practice {
         return topic;
     }
 
-    public List<Sentence> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
@@ -54,7 +54,7 @@ public class Practice {
         this.topic = topic;
     }
 
-    public void setQuestions(List<Sentence> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 }

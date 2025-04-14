@@ -11,14 +11,13 @@ public class Word {
     private String urlImg;
 
     //reference
-    private List<TuVungHocTap> nguoiDungDangHoc;
-    private List<SentenceWord> sentenceWords;
+    private List<LearningVocab> nguoiDungDangHoc;
     // constructor, getter, setter
 
     public Word() {
     }
 
-    public Word(Long id, String noidung, String nghia, String phatAm, String cauVidu, String urlImg, List<TuVungHocTap> nguoiDungDangHoc, List<SentenceWord> sentenceWords) {
+    public Word(Long id, String noidung, String nghia, String phatAm, String cauVidu, String urlImg, List<LearningVocab> nguoiDungDangHoc) {
         this.id = id;
         this.noidung = noidung;
         this.nghia = nghia;
@@ -26,7 +25,6 @@ public class Word {
         this.cauVidu = cauVidu;
         this.urlImg = urlImg;
         this.nguoiDungDangHoc = nguoiDungDangHoc;
-        this.sentenceWords = sentenceWords;
     }
 
     public Long getId() {
@@ -77,20 +75,12 @@ public class Word {
         this.urlImg = urlImg;
     }
 
-    public List<TuVungHocTap> getNguoiDungDangHoc() {
+    public List<LearningVocab> getNguoiDungDangHoc() {
         return nguoiDungDangHoc;
     }
 
-    public void setNguoiDungDangHoc(List<TuVungHocTap> nguoiDungDangHoc) {
+    public void setNguoiDungDangHoc(List<LearningVocab> nguoiDungDangHoc) {
         this.nguoiDungDangHoc = nguoiDungDangHoc;
-    }
-
-    public List<SentenceWord> getSentenceWords() {
-        return sentenceWords;
-    }
-
-    public void setSentenceWords(List<SentenceWord> sentenceWords) {
-        this.sentenceWords = sentenceWords;
     }
 }
 
