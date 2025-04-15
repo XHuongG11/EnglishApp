@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Practice {
-    private Long id;
     private EPracticeType type;
 
     private Topic topic;
@@ -16,17 +15,13 @@ public class Practice {
         questions = new ArrayList<>();
     }
 
-    public Practice(Long id, EPracticeType type, Topic topic, List<Sentence> questions) {
-        this.id = id;
+    public Practice(EPracticeType type, Topic topic, List<Sentence> questions) {
         this.type = type;
         this.topic = topic;
         this.questions = questions;
     }
     //getters
 
-    public Long getId() {
-        return id;
-    }
 
     public EPracticeType getType() {
         return type;
@@ -42,9 +37,6 @@ public class Practice {
 
     //setters
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setType(EPracticeType type) {
         this.type = type;

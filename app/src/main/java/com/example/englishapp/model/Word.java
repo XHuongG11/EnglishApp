@@ -3,7 +3,6 @@ package com.example.englishapp.model;
 import java.util.List;
 
 public class Word {
-    private Long id;
     private String noidung;
     private String nghia;
     private String phatAm;
@@ -12,14 +11,13 @@ public class Word {
 
     //reference
     private List<TuVungHocTap> nguoiDungDangHoc;
-    private List<SentenceWord> sentenceWords;
+    private List<SentenceWord> sentenceWords; // cau hoi ma tu vung nay thuoc ve
     // constructor, getter, setter
 
     public Word() {
     }
 
-    public Word(Long id, String noidung, String nghia, String phatAm, String cauVidu, String urlImg, List<TuVungHocTap> nguoiDungDangHoc, List<SentenceWord> sentenceWords) {
-        this.id = id;
+    public Word(String noidung, String nghia, String phatAm, String cauVidu, String urlImg, List<TuVungHocTap> nguoiDungDangHoc, List<SentenceWord> sentenceWords) {
         this.noidung = noidung;
         this.nghia = nghia;
         this.phatAm = phatAm;
@@ -27,14 +25,6 @@ public class Word {
         this.urlImg = urlImg;
         this.nguoiDungDangHoc = nguoiDungDangHoc;
         this.sentenceWords = sentenceWords;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNoidung() {

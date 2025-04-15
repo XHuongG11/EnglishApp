@@ -3,7 +3,6 @@ package com.example.englishapp.model;
 import java.util.List;
 
 public class User {
-    private Long id;
     private String username;
     private String email;
     private String password;
@@ -12,8 +11,7 @@ public class User {
     private List<TuVungHocTap> tuvunghoctap;
     private LearningProcess tiendohoctap;
 
-    public User(Long id, String username, String email, String password, List<TuVungHocTap> tuvunghoctap, LearningProcess tiendohoctap) {
-        this.id = id;
+    public User(String username, String email, String password, List<TuVungHocTap> tuvunghoctap, LearningProcess tiendohoctap) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -24,14 +22,6 @@ public class User {
 
     }
     //getters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

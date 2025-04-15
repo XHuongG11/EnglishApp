@@ -3,7 +3,6 @@ package com.example.englishapp.model;
 import java.util.List;
 
 public class Topic {
-    private Long id;
     private List<Practice> practices;
 
     // constructor, getter, setter
@@ -12,13 +11,6 @@ public class Topic {
     public Topic() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public List<Practice> getPractices() {
         return practices;

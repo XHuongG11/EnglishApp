@@ -1,20 +1,12 @@
 package com.example.englishapp.model;
 
 public class SentenceWord {
-    private Long id;
     private Sentence sentence;
     private Word word;
 
     public SentenceWord() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Sentence getSentence() {
         return sentence;

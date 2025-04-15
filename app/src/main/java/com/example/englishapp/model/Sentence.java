@@ -3,7 +3,6 @@ package com.example.englishapp.model;
 import java.util.List;
 
 public class Sentence {
-    private Long id;
     private String content;
     private List<SentenceWord> answers;
     private int correctAnswer; // 0 1 2 4 cua list answers
@@ -14,21 +13,13 @@ public class Sentence {
     public Sentence(){
 
     }
-    public Sentence(Long id, String content, List<SentenceWord> answers, int correctAnswer, Practice practice) {
-        this.id = id;
+    public Sentence(String content, List<SentenceWord> answers, int correctAnswer, Practice practice) {
         this.content = content;
         this.answers = answers;
         this.correctAnswer = correctAnswer;
         this.practice = practice;
     }
         //getters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getContent() {
         return content;

@@ -1,7 +1,6 @@
 package com.example.englishapp.model;
 
 public class TopicProgress {
-    private Long id;
     private Topic topic;
     private Practice currentPractice;
 
@@ -9,8 +8,7 @@ public class TopicProgress {
     public TopicProgress(){
 
     }
-    public TopicProgress(Long id, Topic topic, Practice currentPractice) {
-        this.id = id;
+    public TopicProgress(Topic topic, Practice currentPractice) {
         this.topic = topic;
         this.currentPractice = currentPractice;
     }
@@ -23,13 +21,6 @@ public class TopicProgress {
         this.topic = topic;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Practice getCurrentPractice() {
         return currentPractice;
