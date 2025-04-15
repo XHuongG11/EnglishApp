@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav"
         android:fillViewport="true">
 
         <LinearLayout
@@ -43,7 +44,6 @@
                         android:textStyle="bold"
                         android:textSize="16sp" />
                 </FrameLayout>
-
 
                 <!-- Tiêu đề Oceans English -->
                 <LinearLayout
@@ -85,8 +85,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/avt_icon"
-                    android:contentDescription="User Avatar"
-                     />
+                    android:contentDescription="User Avatar" />
             </LinearLayout>
 
             <!-- Phần tiến độ học tập -->
@@ -95,6 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:padding="16dp">
 
@@ -121,7 +121,7 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:paddingTop="20dp"> <!-- chỉnh padding để nội dung đúng giữa vòng -->
+                        android:paddingTop="30dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -141,7 +141,6 @@
                                 android:textSize="30sp"
                                 android:textStyle="bold"
                                 android:textColor="#7A7878" />
-
                         </LinearLayout>
 
                         <TextView
@@ -176,56 +175,77 @@
                                 android:layout_marginLeft="40dp"
                                 android:layout_marginBottom="0dp"
                                 android:contentDescription="Coin Icon" />
-
                         </LinearLayout>
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>
 
-            <!-- Phần bài học -->
-            <LinearLayout
-                android:layout_width="301dp"
-                android:layout_height="301dp"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
+            <!-- Phần danh sách bài học (RecyclerView) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_topics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:background="@drawable/lesson_card_background"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bài Học 1"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thi hiện tại: câu khẳng định"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
-                    android:textStyle="bold"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/star"
-                    android:contentDescription="Stars Icon"
-                    android:layout_marginTop="8dp" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bắt đầu"
-                    android:textColor="#171717"
-                    android:backgroundTint="#FFFFFF"
-                    android:paddingHorizontal="32dp"
-                    android:paddingVertical="8dp"
-                    android:layout_marginTop="16dp" />
-            </LinearLayout>
+                android:padding="16dp"
+                android:nestedScrollingEnabled="true"
+                android:layout_marginTop="60dp"
+                android:clipToPadding="false" />
 
         </LinearLayout>
     </ScrollView>
+
+    <!-- Thanh điều hướng dưới cùng -->
+    <LinearLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/homefull"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:contentDescription="Trang chủ"
+            android:padding="8dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/gym"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:contentDescription="Bài học"
+            android:padding="12dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/rocket"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:contentDescription="Thành tích"
+            android:padding="12dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/setting"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:contentDescription="Cài đặt"
+            android:padding="12dp" />
+    </LinearLayout>
 </RelativeLayout>

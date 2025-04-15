@@ -31,7 +31,7 @@
             android:name=".activity.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AuthActivity"
+            android:name=".activity.WelcomeActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
@@ -39,7 +39,6 @@
         <activity
             android:name=".activity.ListenAndWriteActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true">

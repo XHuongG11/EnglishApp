@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@drawable/homefull" />
-    <item android:drawable="@drawable/house" />
+    <item android:state_checked="true">
+        <bitmap android:src="@drawable/homefull" android:tint="@null" />
+    </item>
+    <item>
+        <bitmap android:src="@drawable/house" android:tint="@null" />
+    </item>
 </selector>
