@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/nav_house_selector"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_gym"
+        android:icon="@drawable/nav_gym_selector"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_rocket"
+        android:icon="@drawable/nav_rocket_selector"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/nav_setting_selector"
+        android:title="" />
+
+</menu>
