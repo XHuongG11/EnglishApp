@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="false"
+    android:background="@drawable/welcome_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"> <!-- Thêm khoảng cách phía trên -->
+
+        <!-- Header với "OCEANS ENGLISH" và biểu tượng menu -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:paddingTop="16dp">
+
+            <!-- Container cho "OCEANS ENGLISH" -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <!-- Dòng chữ "OCEANS" -->
+                <TextView
+                    android:id="@+id/oceansText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OCEANS"
+                    android:textSize="24sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="4dp"/>
+
+                <!-- Dòng chữ "ENGLISH" -->
+                <TextView
+                    android:id="@+id/englishText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENGLISH"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <!-- Biểu tượng menu (ba gạch) -->
+            <ImageView
+                android:id="@+id/menuIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:contentDescription="Menu Icon"
+                android:src="@drawable/welcome_menu" />
+
+        </LinearLayout>
+
+        <!-- Nội dung chính -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingHorizontal="16dp">
+
+            <!-- Tiêu đề -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:text="AN ENGLISH NURSERY FOR YOUNG PEOPLE"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <!-- Mô tả -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Create a useful educational playground to help children learn English well."
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="In addition, there are creative games to help improve the thinking skills of young children."
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- Nút "Learn Now" -->
+            <Button
+                android:id="@+id/learnNowButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#FFFFFF"
+                android:paddingHorizontal="32dp"
+                android:paddingVertical="12dp"
+                android:text="Learn Now"
+                android:textAllCaps="false"
+                android:textColor="#171717"
+                android:textSize="18sp" />
+
+            <!-- Hình ảnh cá voi -->
+            <ImageView
+                android:id="@+id/welcomewhale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="Whale Image"
+                android:maxWidth="400dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/welcome_whale" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

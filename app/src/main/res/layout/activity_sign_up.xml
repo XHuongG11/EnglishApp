@@ -1,0 +1,179 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/signup_background"
+    android:clipToOutline="true">
+
+    <!-- ScrollView để nội dung có thể cuộn được -->
+<ScrollView
+android:layout_width="match_parent"
+android:layout_height="0dp"
+    android:layout_weight="1"
+    android:fillViewport="true">
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="24dp"
+android:gravity="center_horizontal">
+
+<!-- Dấu gạch nhỏ phía trên -->
+<View
+    android:layout_width="40dp"
+    android:layout_height="6dp"
+    android:background="@drawable/handle_bar"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="30dp" />
+
+<!-- Tiêu đề -->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Sign Up"
+    android:textSize="28sp"
+    android:textStyle="bold"
+    android:textColor="#FFFFFF"
+    android:layout_marginBottom="40dp" />
+
+<!-- Các ô nhập -->
+<EditText
+    android:id="@+id/fullnameSignUp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/edit_text_background"
+    android:hint="Fullname"
+    android:padding="20dp"
+    android:textColor="#B02D2B2B"
+    android:textColorHint="#B0343232"
+    android:textSize="14sp" />
+<EditText
+    android:id="@+id/usernameSignUp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/edit_text_background"
+    android:hint="Username"
+    android:padding="20dp"
+    android:textColor="#B02D2B2B"
+    android:textColorHint="#B0343232"
+    android:textSize="14sp" />
+<EditText
+    android:id="@+id/passwordSignUp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/edit_text_background"
+    android:hint="Password"
+    android:padding="20dp"
+    android:textColor="#B02D2B2B"
+    android:textColorHint="#B0343232"
+    android:textSize="14sp" />
+<EditText
+    android:id="@+id/confirmpasswordSignUp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/edit_text_background"
+    android:hint="Confirm Password"
+    android:padding="20dp"
+    android:textColor="#B02D2B2B"
+    android:textColorHint="#B0343232"
+    android:textSize="14sp" />
+
+<!-- Nút đăng ký -->
+<LinearLayout
+    android:id="@+id/signUpButton"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/bg_linear_signup"
+    android:gravity="center"
+    android:padding="12dp"
+    android:layout_marginStart="26dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginEnd="26dp"
+    android:layout_marginBottom="40dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+</LinearLayout>
+
+<!-- Hoặc đăng ký bằng -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_marginBottom="40dp">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Or sign up with"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:layout_marginStart="8dp" />
+</LinearLayout>
+
+<!-- Icon Google - GitHub - Facebook -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="40dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/icon_background"
+        android:contentDescription="Google Icon"
+        android:padding="13dp"
+        android:src="@drawable/google_icon" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/icon_background"
+        android:contentDescription="Twitter Icon"
+        android:padding="13dp"
+        android:src="@drawable/twitter_icon" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/icon_background"
+        android:contentDescription="Facebook Icon"
+        android:padding="13dp"
+        android:src="@drawable/facebook_icon" />
+</LinearLayout>
+</LinearLayout>
+    </ScrollView>
+    </LinearLayout>

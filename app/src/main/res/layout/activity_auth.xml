@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Sign In Layout -->
+    <include
+        android:id="@+id/layoutSignIn"
+        layout="@layout/activity_signin" />
+
+    <!-- Blur background -->
+    <View
+        android:id="@+id/blurBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BF191818"
+        android:visibility="gone" />
+
+    <!-- Sign Up Layout -->
+    <include
+        android:id="@+id/layoutSignUp"
+        layout="@layout/activity_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"/>
+</FrameLayout>
