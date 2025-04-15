@@ -93,4 +93,5 @@ public class SignInActivity extends AppCompatActivity {
                     layoutSignUp.setVisibility(View.GONE);
                 }).start();
     }
+
 }
