@@ -63,7 +63,7 @@ public class WelcomeActivity extends AppCompatActivity {
         learnNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, AuthActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
         });

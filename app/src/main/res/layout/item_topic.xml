@@ -1,0 +1,78 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_topic_card"
+    android:layout_width="360dp"
+    android:layout_height="360dp"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:background="@drawable/lesson_card_background"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_number_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bài Học 1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="Thì hiện tại: câu khẳng định"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="none" />
+
+    <!-- 3 ngôi sao -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/star"
+            android:layout_margin="4dp"
+            android:contentDescription="Sao 1" />
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="Sao 2"
+            android:src="@drawable/star" />
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/star"
+            android:layout_margin="4dp"
+            android:contentDescription="Sao 3" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bắt đầu"
+        android:textColor="#171717"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:backgroundTint="#FFFFFF"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="15dp" />
+
+</LinearLayout>
