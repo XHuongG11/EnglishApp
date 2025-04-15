@@ -3,15 +3,17 @@ package com.example.englishapp.model;
 import java.util.List;
 
 public class User {
+    private Long id;
     private String username;
     private String email;
     private String password;
 
     //reference
-    private List<TuVungHocTap> tuvunghoctap;
+    private List<LearningVocab> tuvunghoctap;
     private LearningProcess tiendohoctap;
 
-    public User(String username, String email, String password, List<TuVungHocTap> tuvunghoctap, LearningProcess tiendohoctap) {
+    public User(Long id, String username, String email, String password, List<LearningVocab> tuvunghoctap, LearningProcess tiendohoctap) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -22,6 +24,14 @@ public class User {
 
     }
     //getters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -47,11 +57,11 @@ public class User {
         this.password = password;
     }
 
-    public List<TuVungHocTap> getTuvunghoctap() {
+    public List<LearningVocab> getTuvunghoctap() {
         return tuvunghoctap;
     }
 
-    public void setTuvunghoctap(List<TuVungHocTap> tuvunghoctap) {
+    public void setTuvunghoctap(List<LearningVocab> tuvunghoctap) {
         this.tuvunghoctap = tuvunghoctap;
     }
 

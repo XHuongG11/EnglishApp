@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Practice {
+    private Long id;
     private EPracticeType type;
 
     private Topic topic;
-    private List<Sentence> questions;
+    private List<Question> questions;
 
     // constructor, getter, setter
 
@@ -15,13 +16,17 @@ public class Practice {
         questions = new ArrayList<>();
     }
 
-    public Practice(EPracticeType type, Topic topic, List<Sentence> questions) {
+    public Practice(Long id, EPracticeType type, Topic topic, List<Question> questions) {
+        this.id = id;
         this.type = type;
         this.topic = topic;
         this.questions = questions;
     }
     //getters
 
+    public Long getId() {
+        return id;
+    }
 
     public EPracticeType getType() {
         return type;
@@ -31,12 +36,15 @@ public class Practice {
         return topic;
     }
 
-    public List<Sentence> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
     //setters
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public void setType(EPracticeType type) {
         this.type = type;
@@ -46,7 +54,7 @@ public class Practice {
         this.topic = topic;
     }
 
-    public void setQuestions(List<Sentence> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 }

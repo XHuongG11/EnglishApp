@@ -3,6 +3,7 @@ package com.example.englishapp.model;
 import java.util.List;
 
 public class Word {
+    private Long id;
     private String noidung;
     private String nghia;
     private String phatAm;
@@ -10,21 +11,28 @@ public class Word {
     private String urlImg;
 
     //reference
-    private List<TuVungHocTap> nguoiDungDangHoc;
-    private List<SentenceWord> sentenceWords; // cau hoi ma tu vung nay thuoc ve
+    private List<LearningVocab> nguoiDungDangHoc;
     // constructor, getter, setter
 
     public Word() {
     }
 
-    public Word(String noidung, String nghia, String phatAm, String cauVidu, String urlImg, List<TuVungHocTap> nguoiDungDangHoc, List<SentenceWord> sentenceWords) {
+    public Word(Long id, String noidung, String nghia, String phatAm, String cauVidu, String urlImg, List<LearningVocab> nguoiDungDangHoc) {
+        this.id = id;
         this.noidung = noidung;
         this.nghia = nghia;
         this.phatAm = phatAm;
         this.cauVidu = cauVidu;
         this.urlImg = urlImg;
         this.nguoiDungDangHoc = nguoiDungDangHoc;
-        this.sentenceWords = sentenceWords;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNoidung() {
@@ -67,20 +75,12 @@ public class Word {
         this.urlImg = urlImg;
     }
 
-    public List<TuVungHocTap> getNguoiDungDangHoc() {
+    public List<LearningVocab> getNguoiDungDangHoc() {
         return nguoiDungDangHoc;
     }
 
-    public void setNguoiDungDangHoc(List<TuVungHocTap> nguoiDungDangHoc) {
+    public void setNguoiDungDangHoc(List<LearningVocab> nguoiDungDangHoc) {
         this.nguoiDungDangHoc = nguoiDungDangHoc;
-    }
-
-    public List<SentenceWord> getSentenceWords() {
-        return sentenceWords;
-    }
-
-    public void setSentenceWords(List<SentenceWord> sentenceWords) {
-        this.sentenceWords = sentenceWords;
     }
 }
 
