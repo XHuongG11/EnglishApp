@@ -34,7 +34,6 @@
             android:name=".activity.AuthActivity"
             android:exported="false" />
         <activity
-<<<<<<< Updated upstream
             android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
@@ -42,25 +41,13 @@
             android:exported="false" />
 
         <activity
-=======
->>>>>>> Stashed changes
             android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.WelcomeActivity"
-            android:exported="false" />
-<<<<<<< Updated upstream
-=======
-        <activity
-            android:name=".activity.MainActivity"
-            android:exported="false" />
->>>>>>> Stashed changes
 
         <meta-data
             android:name="preloaded_fonts"

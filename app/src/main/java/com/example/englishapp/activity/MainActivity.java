@@ -8,10 +8,6 @@ import android.widget.Toast;
 
 import com.example.englishapp.R;
 import com.example.englishapp.dao.UserDAO;
-import com.example.englishapp.model.LearningProcess;
-import com.example.englishapp.model.TuVungHocTap;
-import com.example.englishapp.model.User;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
