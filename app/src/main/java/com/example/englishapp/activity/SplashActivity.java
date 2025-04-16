@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.englishapp.R;
+import com.google.firebase.FirebaseApp;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView fish1, fish2, fish3,fish4;
@@ -23,6 +24,8 @@ public class SplashActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);//ẩn thanh staus bar :)))))
         setContentView(R.layout.activity_splash);
 
+        // ✅ Khởi tạo FirebaseApp nếu chưa khởi tạo
+        FirebaseApp.initializeApp(this);
         // Ánh xạ các con cá
         fish1 = findViewById(R.id.fish1);
         fish2 = findViewById(R.id.fish2);

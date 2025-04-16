@@ -9,9 +9,6 @@ import android.widget.Toast;
 import com.example.englishapp.R;
 import com.example.englishapp.dao.UserDAO;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
