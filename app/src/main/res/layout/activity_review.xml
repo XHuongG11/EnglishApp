@@ -10,19 +10,22 @@
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_review">
-    </ImageView>
+        android:background="@drawable/background_review"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mài dũa kỹ năng"
-        android:paddingTop="8dp"
         android:paddingLeft="16dp"
-        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:text="Mài dũa kỹ năng"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_practice"
@@ -43,7 +46,7 @@
 
             <!-- Phần văn bản -->
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_practice_title"
+                android:id="@+id/text_practice_title1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bài học thực hành"
@@ -57,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_practice_subtitle"
+                android:id="@+id/text_practice_subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -69,7 +72,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_practice_title" />
+                app:layout_constraintTop_toBottomOf="@id/text_practice_title1" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -138,17 +141,19 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/collection_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bộ sưu tập của bạn"
         android:layout_marginTop="24dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
         android:paddingLeft="16dp"
+        android:text="Bộ sưu tập của bạn"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <LinearLayout
@@ -229,16 +234,18 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtHomNay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:text="Hôm nay"
-        android:textStyle="bold"
         android:paddingLeft="16dp"
+        android:text="Hôm nay"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/collection_layout" />
 
     <LinearLayout
@@ -288,7 +295,6 @@
             app:cardCornerRadius="24dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardElevation="4dp"
-            app:cardShadowColor="#80000000"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -341,7 +347,6 @@
             app:cardCornerRadius="24dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardElevation="4dp"
-            app:cardShadowColor="#80000000"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
