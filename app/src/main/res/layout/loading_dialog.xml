@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loadingLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+    <!-- Header với "OCEANS ENGLISH" -->
+
+    <!-- Hình ảnh các con cá -->
+    <ImageView
+        android:id="@+id/fish1"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/whale_vui"
+        android:contentDescription="Fish 1"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-160dp" />
+
+    <ImageView
+        android:id="@+id/fish2"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/turtle_vui"
+        android:contentDescription="Fish 2"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-160dp"
+        android:layout_marginTop="200dp" />
+
+    <ImageView
+        android:id="@+id/fish3"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/puffer_vui"
+        android:contentDescription="Fish 3"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-160dp"
+        android:layout_marginTop="400dp" />
+    <ImageView
+        android:id="@+id/fish4"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:rotation="-30"
+        android:src="@drawable/octopus_vui"
+        android:contentDescription="Fish 4"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-160dp"
+        android:layout_marginTop="400dp" />
+
+    <!-- Hình ảnh các bọt biển -->
+    <ImageView
+        android:id="@+id/bubble1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/splash_bubble"
+        android:contentDescription="Bubble 1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="-20dp" />
+
+    <ImageView
+        android:id="@+id/bubble2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/splash_bubble"
+        android:contentDescription="Bubble 2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginBottom="-15dp" />
+
+    <ImageView
+        android:id="@+id/bubble3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/splash_bubble"
+        android:contentDescription="Bubble 3"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="250dp"
+        android:layout_marginBottom="-25dp" />
+
+    <ImageView
+        android:id="@+id/bubble4"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/splash_bubble"
+        android:contentDescription="Bubble 4"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="350dp"
+        android:layout_marginBottom="-18dp" />
+
+    <ImageView
+        android:id="@+id/bubble5"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@drawable/splash_bubble"
+        android:contentDescription="Bubble 5"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="450dp"
+        android:layout_marginBottom="-22dp" />
+
+<!--    <include layout="@layout/activity_splash" />-->
+</RelativeLayout>

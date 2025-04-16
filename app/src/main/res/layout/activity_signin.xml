@@ -93,7 +93,10 @@
                 android:padding="20dp"
                 android:textColor="#B02D2B2B"
                 android:textColorHint="#B0343232"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"/>
 
             <!-- Password -->
             <EditText
@@ -108,7 +111,10 @@
                 android:padding="20dp"
                 android:textColor="#B02D2B2B"
                 android:textColorHint="#B0343232"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"/>
 
             <!-- Forgot Password -->
             <TextView
