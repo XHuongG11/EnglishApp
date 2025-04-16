@@ -1,0 +1,35 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/gandung_button_container"
+    android:layout_width="200dp"
+    android:layout_height="70dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="24dp"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gần đúng rồi!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#D4B209" />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thử lại lần nữa nhé"
+            android:textSize="14sp"
+            android:textColor="#D4B209" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

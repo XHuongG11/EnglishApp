@@ -1,0 +1,120 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_beach">
+
+    <!-- Tiêu đề "Điền vào chỗ trống" -->
+    <TextView
+        android:id="@+id/title_fill_blank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Điền vào chỗ trống"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Nhúng phần "Chính Xác" -->
+    <include
+        layout="@layout/correct_answer_view"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/title_fill_blank"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Các lựa chọn -->
+    <LinearLayout
+        android:id="@+id/options_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/correct_answer">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp"
+            android:text="They work here"
+            android:textColor="@android:color/black"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp"
+            android:text="I work here"
+            android:textColor="@android:color/black"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp"
+            android:text="We work here"
+            android:textColor="@android:color/black"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="He ... here"
+            android:textColor="@android:color/black"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+    <!-- Hai ô "work" và "works" ở dưới cùng -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"
+            android:text="work"
+
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:backgroundTint="#4ACE4E"
+            app:cornerRadius="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+
+            android:text="works"
+            android:textColor="@color/white"
+            app:backgroundTint="#4ACE4E"
+            android:textStyle="bold"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
