@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.englishapp.R;
+import com.example.englishapp.service.LoginService;
 
 public class SignInActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText;
@@ -55,13 +56,20 @@ public class SignInActivity extends AppCompatActivity {
 
         // Xử lý sự kiện nút "Login"
         loginButton.setOnClickListener(v -> {
-            // Thêm log để kiểm tra
-            Toast.makeText(SignInActivity.this, "Login clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+            String email = usernameEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            LoginService.login(email, password, (success, message) -> {
+                if (success) {
+                    // Thêm log để kiểm tra
+                    Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            });
         });
-
         // Xử lý sự kiện nút "Forgot Password?"
         forgotPasswordText.setOnClickListener(v -> {
             // Chuyển đến màn hình quên mật khẩu (nếu có)
