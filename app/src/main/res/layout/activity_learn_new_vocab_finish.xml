@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".learn_new_vocab_finish">
+    <!-- Icon đóng -->
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:src="@drawable/close_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:padding="8dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/btnClose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:id="@+id/layoutImage">
+        <ImageView
+            android:id="@+id/mainImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/whale_vui_khi_ban_phao_hoa"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bạn vừa học thêm ngữ pháp mới!!!"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <!-- Các ô trạng thái: Thưởng - Ổn - Tốt -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/stateAfterLearn"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/layoutImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Ô Thưởng -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_reward"
+            android:padding="12dp"
+            android:text="Thưởng\n💰20"
+            android:textColor="#FF6600"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginEnd="8dp"
+            android:textStyle="bold" />
+
+        <!-- Ô Ổn -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_okay"
+            android:padding="12dp"
+            android:text="Ổn\n⏱ 31:34"
+            android:textColor="#93349A"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginEnd="8dp"
+            android:textStyle="bold" />
+
+        <!-- Ô Tốt -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_good"
+            android:padding="12dp"
+            android:text="Tốt\n✅ 100%"
+            android:textColor="#4CAF50"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Nút Tiếp theo -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiếp theo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="32dp"
+        android:layout_marginHorizontal="16dp"
+        android:paddingHorizontal="70dp"
+        app:cornerRadius="12dp"
+        app:backgroundTint="#1976D2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,8 +20,22 @@
         android:theme="@style/Theme.EnglishApp"
         tools:targetApi="31">
         <activity
-            android:name=".activity.SpeakCheckerActivity"
+            android:name=".learn_new_vocab_finish"
             android:exported="false" />
+        <activity
+            android:name=".activity.ReviewWordActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LearnWordByImageActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".activity.SpeakCheckerActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".activity.BaseActivity"
             android:exported="false" />
@@ -45,13 +59,8 @@
             android:name=".activity.ListenAndWriteActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".activity.SpeakCheckerActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
