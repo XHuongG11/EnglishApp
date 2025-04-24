@@ -1,0 +1,38 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/speak_button_container"
+    android:layout_width="200dp"
+    android:layout_height="70dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="24dp"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:padding="12dp">
+
+        <!-- Biểu tượng micro -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_mic"
+            android:tint="#2196F3"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Văn bản "Ân vào nói" -->
+        <TextView
+            android:id="@+id/speak_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ấn và nói"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
