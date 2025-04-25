@@ -31,13 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.ReviewWordActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".activity.LearnWordByImageActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".activity.SpeakCheckerActivity" -->
-        <!-- android:exported="false" /> -->
+            android:exported="true"/>
         <activity
             android:name=".activity.BaseActivity"
             android:exported="false" />
@@ -62,6 +56,9 @@
             android:exported="true"/>
         <activity
             android:name=".activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SplashActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ListenAndWriteActivity"
