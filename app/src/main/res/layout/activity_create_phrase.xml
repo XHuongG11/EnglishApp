@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/underwater_background">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="Tạo một cụm từ"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <!-- Khung thông điệp -->
+    <LinearLayout
+        android:id="@+id/message_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_text"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edit_text_background"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/thong_diep_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thêm"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#787474" />
+
+            <TextView
+                android:id="@+id/thong_diep_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-s"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1976D2" />
+
+            <TextView
+                android:id="@+id/thong_diep_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" hoặc "
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#787474" />
+
+            <TextView
+                android:id="@+id/thong_diep_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-es "
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1976D2" />
+
+            <TextView
+                android:id="@+id/thong_diep_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" sau danh từ số ít để chuyển"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#787474" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/thong_diep_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="thành dạng số nhiều."
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#787474" />
+    </LinearLayout>
+
+    <!-- Hàng chứa ImageView và TextView -->
+    <LinearLayout
+        android:id="@+id/hang_image_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_below="@id/message_container"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_speech"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/van_ban_phu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tôi thích con mèo của tôi"
+            android:textSize="24sp"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <!-- FrameLayout cho phản hồi -->
+    <FrameLayout
+        android:id="@+id/fragmentFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:layout_below="@id/hang_image_text"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp" />
+
+    <!-- Hàng nút -->
+
+    <LinearLayout
+        android:id="@+id/word_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/include"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="50dp">
+
+        <Button
+            android:id="@+id/btn_word_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I"
+            android:backgroundTint="#2196F3"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn_word_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="like"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn_word_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="my cat"
+            android:backgroundTint="#F5F8FA"
+            android:textColor="#090909" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragmentFeedback1"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="516dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </FrameLayout>
+    <!-- Include bố cục dưới cùng -->
+    <include
+        android:id="@+id/include"
+        layout="@layout/bottom_excercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
