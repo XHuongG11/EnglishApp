@@ -24,6 +24,10 @@ public class Topic {
         return numberTopic;
     }
 
+    public void setNumberTopic(String numberTopic) {
+        this.numberTopic = numberTopic;
+    }
+
     public String getName() {
         return name;
     }

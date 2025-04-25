@@ -1,5 +1,6 @@
 package com.example.englishapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -13,31 +14,48 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.englishapp.R;
 import com.example.englishapp.adapter.TopicAdapter;
+import com.example.englishapp.dao.TopicDAO;
 import com.example.englishapp.model.Topic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private TopicDAO topicDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
-       // getLayoutInflater().inflate(R.layout.activity_home, findViewById(R.id.content_frame));
+
+        // Khởi tạo TopicDAO
+        topicDAO = new TopicDAO();
 
         RecyclerView recyclerView = findViewById(R.id.rv_topics);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Hiển thị ngang
-        List<Topic> danhSach = Arrays.asList(
-                new Topic("Bài Học 1", "Thì hiện tại: câu khẳng định", new ArrayList<>(), R.drawable.lesson_card_background),
-                new Topic("Bài Học 2", "Danh từ số nhiều", new ArrayList<>(), R.drawable.lesson_card_background2),
-                new Topic("Bài Học 3", "Thì hiện tại đơn: Câu nghi vấn", new ArrayList<>(), R.drawable.lesson_card_background3),
-                new Topic("Bài Học 4", "Thì hiện tại đơn: Câu phủ định", new ArrayList<>(), R.drawable.lesson_card_background4)
-        );
+
+        // Lấy danh sách Topic từ TopicDAO
+        List<Topic> danhSach = topicDAO.getAll();
+        if (danhSach.isEmpty()) {
+            Toast.makeText(this, "Không có chủ đề nào!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Thiết lập Adapter
         TopicAdapter adapter = new TopicAdapter(danhSach, chuDe -> {
+            // Xử lý khi nhấn vào Topic
             Toast.makeText(this, "Đã nhấn: " + chuDe.getName(), Toast.LENGTH_SHORT).show();
+
+            // Chuyển đến CreatePhrase với Topic và Practice đầu tiên
+            if (!chuDe.getPractices().isEmpty()) {
+                Intent intent = new Intent(HomeActivity.this, CreatePhrase.class);
+                intent.putExtra("TOPIC_NUMBER", chuDe.getNumberTopic());
+                intent.putExtra("PRACTICE_ID", chuDe.getPractices().get(0).getId());
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chủ đề này không có bài tập!", Toast.LENGTH_SHORT).show();
+            }
         });
         recyclerView.setAdapter(adapter);
     }
