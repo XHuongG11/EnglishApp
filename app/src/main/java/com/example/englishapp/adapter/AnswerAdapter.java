@@ -3,6 +3,7 @@ package com.example.englishapp.adapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,32 +11,40 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.englishapp.R;
+import com.example.englishapp.activity.ListenAndMatchActivity;
 import com.example.englishapp.databinding.ViewholderAnswerMatchBinding;
+import com.example.englishapp.fragment.CorrectAnswerFragment;
+import com.example.englishapp.fragment.ErrorAnswerFragment;
 import com.example.englishapp.model.Word;
+import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.List;
 
-public class AnswerApdapter extends RecyclerView.Adapter<AnswerApdapter.ViewHolder> {
+public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder> {
 
     private Context context;
     private List<Word> itemList;
-    LinearLayout layoutPhraseContainer;
-
-    public AnswerApdapter(Context context, List<Word> itemList, LinearLayout layoutPhraseContainer) {
+    FlexboxLayout layoutPhraseContainer;
+    private ListenAndMatchActivity activity;
+    public AnswerAdapter(ListenAndMatchActivity activity, Context context, List<Word> itemList, FlexboxLayout layoutPhraseContainer) {
+        this.activity = activity;
         this.context = context;
         this.itemList = itemList;
         this.layoutPhraseContainer = layoutPhraseContainer;
     }
-    public AnswerApdapter(List<Word> itemList) {
+    public AnswerAdapter(List<Word> itemList) {
         this.itemList = itemList;
     }
     // Dùng để tạo ViewHolder cho mỗi item trong RecyclerView.
     // Được gọi khi RecyclerView cần tạo một ViewHolder mới.
     @NonNull
     @Override
-    public AnswerApdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AnswerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // Gắn ViewBinding vào parent
         ViewholderAnswerMatchBinding binding = ViewholderAnswerMatchBinding.inflate(inflater, parent, false);
@@ -45,12 +54,13 @@ public class AnswerApdapter extends RecyclerView.Adapter<AnswerApdapter.ViewHold
     // Dùng để gán dữ liệu vào ViewHolder.
     // Được gọi khi RecyclerView cần hiển thị dữ liệu tại vị trí cụ thể.
     @Override
-    public void onBindViewHolder(@NonNull AnswerApdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AnswerAdapter.ViewHolder holder, int position) {
         Word item = itemList.get(position);
         holder.binding.btnWord.setText(item.getNoidung());
         holder.binding.btnWord.setOnClickListener(v -> {
             animateButtonUp(holder.binding.btnWord);
             addWordToPhraseFrom(holder.binding.btnWord, holder);
+            activity.updateCheckButtonState();
 //            updateCheckButtonState();
         });
     }
@@ -81,10 +91,10 @@ public class AnswerApdapter extends RecyclerView.Adapter<AnswerApdapter.ViewHold
         animator.setDuration(300);
         animator.start();
     }
-    private void addWordToPhraseFrom(Button originalButton, AnswerApdapter.ViewHolder holder) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+    private void addWordToPhraseFrom(Button originalButton, AnswerAdapter.ViewHolder holder) {
+        FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         );
         params.setMargins(20, 0, 20, 0);
 
@@ -109,10 +119,12 @@ public class AnswerApdapter extends RecyclerView.Adapter<AnswerApdapter.ViewHold
             Button original = (Button) v.getTag();
             removeWordFromPhrase(v);
             animateButtonDown(original);
-//          updateCheckButtonState();
+            activity.updateCheckButtonState();
+
         });
 
         layoutPhraseContainer.addView(clone);
+
     }
     private void removeWordFromPhrase(View view) {
         layoutPhraseContainer.removeView(view);

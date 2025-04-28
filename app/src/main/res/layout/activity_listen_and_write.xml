@@ -25,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView6"
         android:layout_width="match_parent"
         android:layout_height="92dp"
         android:layout_marginStart="20dp"
@@ -63,7 +64,9 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView5"
         android:layout_width="match_parent"
         android:layout_height="337dp"
         android:layout_marginStart="20dp"
@@ -120,6 +123,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progressData"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentFeedback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/include"

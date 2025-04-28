@@ -57,20 +57,20 @@ public class Question {
         this.meaning = meaning;
     }
 
-    public List<Word> getErrorAnswers() {
-        return answers;
-    }
-
-    public void setErrorAnswers(List<Word> answers) {
-        this.answers = answers;
-    }
-
     public Word getCorrectAnswer() {
         return correctAnswer;
     }
 
     public void setCorrectAnswer(Word correctAnswer) {
         this.correctAnswer = correctAnswer;
+    }
+
+    public List<Word> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Word> answers) {
+        this.answers = answers;
     }
 
     public Practice getPractice() {

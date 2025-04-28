@@ -6,6 +6,7 @@
     </style>
 
     <style name="Theme.EnglishApp" parent="Base.Theme.EnglishApp" />
+
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Các thuộc tính khác -->
         <item name="bottomNavigationStyle">@style/CustomBottomNav</item>

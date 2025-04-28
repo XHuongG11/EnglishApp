@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OceansEnglish</string>
+    <string name="title_activity_listen_and_match">ListenAndMatchActivity</string>
 </resources>

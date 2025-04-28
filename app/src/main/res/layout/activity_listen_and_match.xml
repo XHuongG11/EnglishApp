@@ -2,9 +2,122 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ListenAndMatchActivity">
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_beach"
+    tools:context=".activity.ListenAndWriteActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="236dp"
+        android:text="Bạn nghe thấy gì?"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView4"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/blue_volume"
+                tools:srcCompat="@drawable/blue_volume" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ware_audio"
+                tools:srcCompat="@drawable/ware_audio" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/fragmentFeedback"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="8dp"
+        app:alignItems="center"
+        app:flexWrap="wrap"
+        app:justifyContent="flex_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
+
+    <ProgressBar
+        android:id="@+id/progressAnswer"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewAnwers" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAnwers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
+
+    <FrameLayout
+        android:id="@+id/fragmentFeedback1"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="616dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </FrameLayout>
+    <include
+        android:id="@+id/include"
+        layout="@layout/bottom_excercise"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

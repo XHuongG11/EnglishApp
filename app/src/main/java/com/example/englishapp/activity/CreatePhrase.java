@@ -40,7 +40,7 @@ public class CreatePhrase extends AppCompatActivity {
 
         btnWord1 = findViewById(R.id.btn_word_1);
         btnWord2 = findViewById(R.id.btn_word_2);
-        btnWord3 = findViewById(R.id.btn_word_3);
+        btnWord3 = findViewById(R.id.btn_word);
         btnCheck = findViewById(R.id.btnCheck);
         FrameLayout fragmentFeedback = findViewById(R.id.fragmentFeedback);
         FrameLayout fragmentFeedback1 = findViewById(R.id.fragmentFeedback1);
@@ -84,11 +84,11 @@ public class CreatePhrase extends AppCompatActivity {
 
     private void getDatabase() {
         // Lấy danh sách câu hỏi từ QuestionDAO
-        questions = questionDAO.getAll();
-        if (questions.isEmpty()) {
-            finish();
-            return;
-        }
+//        questions = questionDAO.getAll();
+//        if (questions.isEmpty()) {
+//            finish();
+//            return;
+//        }
     }
 
     private void loadQuestion(int index) {

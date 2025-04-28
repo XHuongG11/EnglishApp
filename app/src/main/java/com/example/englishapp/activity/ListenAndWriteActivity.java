@@ -1,6 +1,7 @@
 package com.example.englishapp.activity;
 
 import androidx.annotation.OptIn;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,19 +14,29 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.englishapp.R;
+import com.example.englishapp.dao.OnGetAllListener;
+import com.example.englishapp.dao.OnGetByIdListener;
+import com.example.englishapp.dao.PracticeDAO;
+import com.example.englishapp.dao.QuestionDAO;
+import com.example.englishapp.dao.TopicDAO;
 import com.example.englishapp.fragment.CorrectAnswerFragment;
 import com.example.englishapp.fragment.ErrorAnswerFragment;
+import com.example.englishapp.model.EPracticeType;
 import com.example.englishapp.model.Practice;
 import com.example.englishapp.model.Question;
+import com.example.englishapp.model.Topic;
 import com.example.englishapp.model.Word;
 import com.example.englishapp.util.Sound;
 import com.google.android.material.button.MaterialButton;
@@ -44,6 +55,8 @@ public class ListenAndWriteActivity extends AppCompatActivity {
     private List<Question> questions;
     private ImageView imgVolume;
     private int numberQuestion;
+    private ProgressBar progressData;
+    private PracticeDAO practiceDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +70,25 @@ public class ListenAndWriteActivity extends AppCompatActivity {
         sound = new Sound(this);
         questions = new ArrayList<>();
         imgVolume = findViewById(R.id.imgVolume);
+        progressData = findViewById(R.id.progressData);
 
-        getDatabase();
-        numberQuestion = questions.size();
-        loadQuestion(0);
+        practiceDAO = new PracticeDAO();
+        progressData.setVisibility(View.VISIBLE);
+        TopicDAO topicDAO = new TopicDAO();
+        topicDAO.getByNumberTopic("Topic 1", new OnGetByIdListener<Topic>() {
+            @Override
+            public void onGetByID(Topic topic) {
+                if(topic != null){
+                    Log.d("DEBUG", "topic");
+                    getDatabase(topic);
+                }
+            }
+
+            @Override
+            public void onGetFailed(Exception e) {
+
+            }
+        });
         String audioUrl = "https://dictionary.cambridge.org/media/english/us_pron/h/hit/hit__/hit.mp3";
 
     }
@@ -141,12 +169,9 @@ public class ListenAndWriteActivity extends AppCompatActivity {
     }
     private void loadContent(Question question){
         try {
-            Log.d("DEBUG", "load content");
             String content = question.getContent();
             String correctAnswer = question.getCorrectAnswer().getNoidung();
-            Log.d("DEBUG", "correct answer: " + correctAnswer + ", content: " + content);
             String[] parts = content.split(correctAnswer);
-            Log.d("DEBUG", parts[0] + ", " + parts[1]);
             prevText.setText(parts[0].trim());
             afterText.setText(parts[1].trim());
             editWord.setText("");
@@ -163,14 +188,26 @@ public class ListenAndWriteActivity extends AppCompatActivity {
             Log.d("Error", e.toString());
         }
     }
-    private void getDatabase() {
-        Word word = new Word();
-        word.setNoidung("wants");
-        questions.add(new Question(1L, "He wants tea", "Anh ấy muốn uống  trà", word, null));
+    private void getDatabase(Topic topic) {
+        practiceDAO.getByNumberTopic(topic.getNumberTopic(), new OnGetAllListener<Practice>() {
+            @RequiresApi(api = Build.VERSION_CODES.VANILLA_ICE_CREAM)
+            @Override
+            public void onGetAll(List<Practice> t) {
+                Practice practice = t.stream().filter(p -> p.getType().equals(EPracticeType.NGHEVIET))
+                        .findFirst().orElse(null);
+                if(practice != null){
+                    questions = practice.getQuestions();
+                    numberQuestion = questions.size();
+                    loadQuestion(0);
+                    progressData.setVisibility(View.GONE);
+                }
+            }
 
-        Word word2 = new Word();
-        word2.setNoidung("like");
-        questions.add(new Question(2L, "I like my cat", "Tôi thích con mèo của tôi", word2, null));
+            @Override
+            public void onGetFailed(Exception e) {
+
+            }
+        });
     }
 
     private void playAudio(String audioUrl) {
@@ -190,4 +227,60 @@ public class ListenAndWriteActivity extends AppCompatActivity {
             exoPlayer = null;
         }
     }
+    private void initData(){
+        QuestionDAO questionDAO = new QuestionDAO();
+        List<Question> questions = new ArrayList<>();
+
+        // Câu 1
+        questions.add(new Question(6L, "He wants tea", "Anh ấy muốn trà", new Word("wants"), null));
+
+        // Câu 2
+        questions.add(new Question(7L, "I like my cat", "Tôi thích con mèo của tôi", new Word("like"), null));
+
+        // Câu 3
+        questions.add(new Question(8L, "He plays football", "Anh ấy chơi bóng đá", new Word("plays"), null));
+
+        // Câu 4
+        questions.add(new Question(9L, "She studies math", "Cô ấy học toán", new Word("studies"), null));
+
+        // Câu 5
+        questions.add(new Question(10L, "They go to the park", "Họ đi đến công viên", new Word("go"), null));
+
+        // Lưu các câu hỏi vào Firestore
+        for (Question q : questions) {
+            questionDAO.create(q, success -> {
+                if (success) {
+                    Log.d("CREATE_QUESTION", "Question saved successfully");
+                } else {
+                    Log.e("CREATE_QUESTION", "Failed to save question");
+                }
+            });
+        }
+
+// Sau khi lưu các câu hỏi, lưu Practice
+        TopicDAO topicDAO = new TopicDAO();
+        topicDAO.getByNumberTopic("Topic 1", new OnGetByIdListener<Topic>() {
+            @Override
+            public void onGetByID(Topic topic) {
+                if (topic != null) {
+                    Practice practice = new Practice(2L, EPracticeType.NGHEVIET, topic, questions);
+                    PracticeDAO practiceDAO = new PracticeDAO();
+                    practiceDAO.create(practice, isSuccess -> {
+                        if (isSuccess) {
+                            Log.d("CREATE_PRACTICE", "Practice saved successfully");
+                        } else {
+                            Log.e("CREATE_PRACTICE", "Failed to save practice");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onGetFailed(Exception e) {
+
+            }
+        });
+
+    }
+
 }
