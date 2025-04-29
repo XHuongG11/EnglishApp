@@ -19,16 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/headerChonBanDich"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chọn bản dịch"
-            android:layout_marginBottom="20dp"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,47 +48,30 @@
     <ImageView
         android:id="@+id/illustrationImage"
         android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/iillustrationimage"
         android:scaleType="fitCenter"
         android:padding="4dp"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-    <!-- Header + từ vựng -->
-    <LinearLayout
-        android:id="@+id/buttonLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="40dp"
+    <!-- Mặt sau của thẻ (hiển thị nghĩa) -->
+    <TextView
+        android:id="@+id/meaningText"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="muốn"
+        android:textStyle="normal"
+        android:background="@drawable/rounded_image_background"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/illustrationImage">
+        />  <!-- nền mờ tối -->
 
-        <Button
-            android:id="@+id/button_meaning_one"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:text="muốn"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#E0F7FA"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:alpha="0.9"/>
-
-        <Button
-            android:id="@+id/button_meaning_two"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:text="ngủ"
-            android:backgroundTint="#E0F7FA"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:alpha="0.9" />
-    </LinearLayout>
-
+    <!-- Header + từ vựng -->
 </androidx.constraintlayout.widget.ConstraintLayout>

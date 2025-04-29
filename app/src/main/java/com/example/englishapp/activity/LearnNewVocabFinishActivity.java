@@ -1,4 +1,4 @@
-package com.example.englishapp;
+package com.example.englishapp.activity;
 
 import android.os.Bundle;
 
@@ -8,7 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class learn_new_vocab_finish extends AppCompatActivity {
+import com.example.englishapp.R;
+
+public class LearnNewVocabFinishActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

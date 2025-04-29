@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".learn_new_vocab_finish">
+    tools:context=".activity.LearnNewVocabFinishActivity">
     <!-- Icon đóng -->
     <ImageView
         android:id="@+id/btnClose"

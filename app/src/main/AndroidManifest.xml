@@ -20,10 +20,10 @@
         android:theme="@style/Theme.EnglishApp"
         tools:targetApi="31">
         <activity
-            android:name=".learn_new_vocab_finish"
+            android:name=".activity.ReviewWordActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ReviewWordActivity"
+            android:name=".activity.LearnWordByImageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LearnWordByImageActivity"
+            android:name=".activity.LearnNewVocabFinishActivity"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".activity.SpeakCheckerActivity" -->
         <!-- android:exported="false" /> -->
