@@ -1,9 +1,13 @@
 package com.example.englishapp.activity;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +18,7 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -25,12 +30,21 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.englishapp.R;
 import com.example.englishapp.model.Word;
+import com.example.englishapp.util.PronunciationChecker;
+import com.example.englishapp.util.Sound;
 
 import java.util.Arrays;
 import java.util.List;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+
 
 public class LearnWordByImageActivity extends AppCompatActivity {
     private static int index = 0;
+    private GestureDetector gestureDetector;
+    private Sound sound;
     public static List<Word> getWordList() {
         return Arrays.asList(
                 new Word(
@@ -91,6 +105,12 @@ public class LearnWordByImageActivity extends AppCompatActivity {
     }
     ImageView imageView;
     TextView meaningText;
+    ImageView speaker;
+    Word currentWord;
+    ImageView recorder;
+    TextView resultCheckerTextView;
+    TextView formattedfeedback;
+    private PronunciationChecker pronunciationChecker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +120,19 @@ public class LearnWordByImageActivity extends AppCompatActivity {
         meaningText = findViewById(R.id.meaningText);
         meaningText.setVisibility(View.GONE);
         boolean[] isBackVisible = {false};
+        sound = new Sound(getApplicationContext());
+        speaker = findViewById(R.id.speaker);
+        recorder = findViewById(R.id.recorder);
+        formattedfeedback = findViewById(R.id.textViewFormattedfeedback);
+
+
+        TextView swipeHintText = findViewById(R.id.swipeHintText);
+        Animation blink = new AlphaAnimation(0.0f, 1.0f);
+        blink.setDuration(500);
+        blink.setStartOffset(20);
+        blink.setRepeatMode(Animation.REVERSE);
+        blink.setRepeatCount(Animation.INFINITE);
+        swipeHintText.startAnimation(blink);
 
         imageView.setOnClickListener(v -> {
             if (!isBackVisible[0]) {
@@ -143,12 +176,153 @@ public class LearnWordByImageActivity extends AppCompatActivity {
                 isBackVisible[0] = false;
             }
         });
-        loadContent(getWordList().get(2));
+        initGestureDetector();
+        //init meta
+        currentWord = getWordList().get(0);
+        loadContent(currentWord);
+        speaker.setOnClickListener(v -> {
+            sound.readText(currentWord.getNoidung());
+        });
+        setUpRecordWord();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            recorder.performClick();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (pronunciationChecker != null) {
+            pronunciationChecker.release();
+        }
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event) || super.onTouchEvent(event);
     }
     private void loadContent(Word word){
         loadImage(word.getUrlImg());
         loadContentForText(word);
     }
+    private void initGestureDetector(){
+        gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+            private static final int SWIPE_THRESHOLD = 100;
+            private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                float diffX = e2.getX() - e1.getX();
+                float diffY = e2.getY() - e1.getY();
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                        if (diffX > 0) {
+                            showPreviousWord(); // Vuốt phải
+                        } else {
+                            showNextWord(); // Vuốt trái
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+    }
+    private void showNextWord() {
+        if (index < getWordList().size() - 1) {
+            index++;
+
+        } else {
+            index = 0;
+        }
+        currentWord = getWordList().get(index);
+        animateTransition(true);
+    }
+
+    private void showPreviousWord() {
+        if (index > 0) {
+            index--;
+        } else {
+            index = getWordList().size() - 1;
+        }
+        currentWord = getWordList().get(index);
+        animateTransition(false);
+    }
+
+    private void animateTransition(boolean isNext) {
+        // Ẩn các view hiện tại (image và text)
+        final ImageView currentView = findViewById(R.id.illustrationImage);
+
+        // Áp dụng hiệu ứng mờ dần (alpha) hoặc dịch chuyển (translation)
+        currentView.animate().alpha(0f).setDuration(300).withEndAction(() -> {
+            currentView.setVisibility(View.GONE);
+
+            // Sau khi ẩn, load nội dung mới và hiển thị
+            loadContent(currentWord);
+            setUpReadWord();
+            setUpRecordWord();
+
+            // Tạo hiệu ứng xuất hiện (mờ dần)
+            currentView.setVisibility(View.VISIBLE);
+            currentView.setAlpha(0f);
+
+            currentView.animate().alpha(1f).setDuration(300).start();
+        }).start();
+    }
+    private void setUpReadWord(){
+        speaker.setOnClickListener(v -> {
+            sound.readText(currentWord.getNoidung());
+        });
+    }
+
+    private void initRecognizerChecker(String targetText){
+        resultCheckerTextView = findViewById(R.id.resultCheckerTextView);
+        pronunciationChecker = new PronunciationChecker(this, targetText);
+        // Set result listener
+        pronunciationChecker.setOnPronunciationResultListener(new PronunciationChecker.OnPronunciationResultListener() {
+            @Override
+            public void onPronunciationResult(String targetText, String spokenText, int accuracyPercentage, String formattedFeedback) {
+                resultCheckerTextView.setText("Target text: "+targetText+"\nYou said: "
+                        + spokenText + "\nAccuracy: " + accuracyPercentage+"%");
+                formattedfeedback.setText(Html.fromHtml(formattedFeedback));
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                resultCheckerTextView.setText("Error: " + errorMessage);
+            }
+
+            @Override
+            public void onListeningStarted() {
+                resultCheckerTextView.setText("Listening...");
+            }
+
+            @Override
+            public void onListeningFinished() {
+                imageView.setEnabled(true);
+            }
+        });
+    }
+
+    private void setUpRecordWord(){
+        recorder.setOnClickListener(v -> {
+            initRecognizerChecker(currentWord.getNoidung());
+            if (pronunciationChecker.hasRecordAudioPermission()) {
+                recorder.setEnabled(false);
+                pronunciationChecker.startListening();
+                recorder.setEnabled(true);
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECORD_AUDIO}, 100);
+                Log.e("RECORD","This app doesn't have permission to record");
+            }
+        });
+    }
+
     private void loadImage(String imageUrl)
     {
         // Tìm ImageView
@@ -171,9 +345,12 @@ public class LearnWordByImageActivity extends AppCompatActivity {
                     }
                 })
                 .into(illustrationImage);
+
     }
     private void loadContentForText(Word word){
-        meaningText.setText(word.getNoidung());
+        TextView textViewWord = findViewById(R.id.word);
+        meaningText.setText(word.getNoidung()+"\n"+word.getNghia()+"\n"+word.getPhatAm());
+        textViewWord.setText(word.getNoidung());
     }
 
 }

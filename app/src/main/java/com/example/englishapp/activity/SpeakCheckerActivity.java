@@ -36,11 +36,8 @@ public class SpeakCheckerActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_speakchecker);
         sound = new Sound(getApplicationContext());
-
-
         mappingWithId();
         setEvent();
-
 
         // Set button click listener
         buttonRecord.setOnClickListener(v -> {
