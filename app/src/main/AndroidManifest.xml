@@ -27,23 +27,25 @@
             android:name=".activity.SpeakCheckerActivity"
             android:exported="false" />
         <activity
-            android:name=".learn_new_vocab_finish"
+            android:name=".activity.LearnNewVocabFinishActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.LearnWordByImageActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activity.ReviewWordActivity"
-            android:exported="true"/>
+            android:exported="false" />
         <activity
             android:name=".activity.BaseActivity"
             android:exported="false" />
         <activity
             android:name=".activity.HomeActivity"
-            android:exported="true">
-<!--        <intent-filter>-->
-<!--            <action android:name="android.intent.action.MAIN" />-->
-
-<!--            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--        </intent-filter>-->
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".activity.SignUpActivity"
             android:exported="false"
