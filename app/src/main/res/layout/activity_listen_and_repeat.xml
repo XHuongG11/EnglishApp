@@ -19,171 +19,75 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- ListView để hiển thị danh sách các card -->
+
+    <!-- Container để hiển thị phản hồi (gần đúng, hoàn hảo, hoặc micro) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/feedbackContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/listViewCards"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/action_button">
+
+        <include
+            android:id="@+id/gandungButton"
+            layout="@layout/gandung"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <include
+            android:id="@+id/hoanhaoButton"
+            layout="@layout/hoanhao"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+<!--        <include-->
+<!--            android:id="@+id/voiceButton"-->
+<!--            layout="@layout/voice"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Nhúng nút "Ân vào nói" -->
+    <ListView
+        android:id="@+id/listViewCards"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="16dp"
+        android:divider="@null"
+        app:layout_constraintBottom_toTopOf="@+id/action_button"
+        android:listSelector="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_girl"
-        app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
-        app:layout_constraintEnd_toStartOf="@+id/materialCardView2"
-        app:layout_constraintStart_toStartOf="parent">
-    </ImageView>
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/listViewCards"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_repeat_listen"
+        app:layout_constraintVertical_bias="0.28" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgVolume1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/blue_volume"
-                tools:srcCompat="@drawable/blue_volume" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Work"
-                android:textColor="#1976D2"
-                android:textSize="18sp"
-                android:textStyle="bold"></TextView>
-
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView2"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgVolume2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/blue_volume"
-                tools:srcCompat="@drawable/blue_volume" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="......."
-                android:textColor="#AFAFAF"
-                android:textSize="18sp"
-                android:textStyle="bold"></TextView>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:src="@drawable/ic_eye"></ImageView>
-
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView3"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgVolume3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/blue_volume"
-                tools:srcCompat="@drawable/blue_volume" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="......."
-                android:textColor="#AFAFAF"
-                android:textSize="18sp"
-                android:textStyle="bold"></TextView>
-
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView3">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgVolume4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/blue_volume"
-                tools:srcCompat="@drawable/blue_volume" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="......."
-                android:textColor="#AFAFAF"
-                android:textSize="18sp"
-                android:textStyle="bold"></TextView>
-
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-    <!-- Nhúng nút "Ân vào nói" -->
     <include
         android:id="@+id/action_button"
         layout="@layout/an_va_noi"

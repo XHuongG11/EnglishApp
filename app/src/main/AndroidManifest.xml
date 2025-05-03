@@ -31,6 +31,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.LearnWordByImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ListenAndRepeatActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
