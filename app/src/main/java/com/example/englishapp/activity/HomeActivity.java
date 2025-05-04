@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }
 
-                TopicAdapter adapter = new TopicAdapter(danhSach, chuDe -> {
+                TopicAdapter adapter = new TopicAdapter(HomeActivity.this, danhSach, chuDe -> {
                     Toast.makeText(HomeActivity.this, "Đã nhấn: " + chuDe.getName(), Toast.LENGTH_SHORT).show();
 
                     if (!chuDe.getPractices().isEmpty()) {

@@ -1,5 +1,6 @@
 package com.example.englishapp.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ import com.example.englishapp.dao.TopicDAO;
 import com.example.englishapp.databinding.ActivityListenAndMatchBinding;
 import com.example.englishapp.fragment.CorrectAnswerFragment;
 import com.example.englishapp.fragment.ErrorAnswerFragment;
+import com.example.englishapp.global.GlobalData;
 import com.example.englishapp.model.EPracticeType;
 import com.example.englishapp.model.Practice;
 import com.example.englishapp.model.Question;
@@ -101,7 +103,7 @@ public class ListenAndMatchActivity extends AppCompatActivity {
 
         progressAnswer.setVisibility(View.VISIBLE);
         TopicDAO topicDAO = new TopicDAO();
-        topicDAO.getByNumberTopic("Topic 1", new OnGetByIdListener<Topic>() {
+        topicDAO.getByNumberTopic(GlobalData.currentTopic, new OnGetByIdListener<Topic>() {
             @Override
             public void onGetByID(Topic topic) {
                 if(topic != null){
@@ -194,6 +196,12 @@ public class ListenAndMatchActivity extends AppCompatActivity {
                 transaction.commit();
                 btnCheck.setOnClickListener(view -> {
                     indexCurrentQuestion += 1;
+                    // nếu hết câu chuyển tiếp
+                    if(indexCurrentQuestion == questions.size()){
+                        Intent intentDirect = new Intent(ListenAndMatchActivity.this, LearnNewVocabFinishActivity.class);
+                        startActivity(intentDirect);
+                        return;
+                    }
                     currentQuestion = questions.get(indexCurrentQuestion);
                     layoutPhraseContainer.removeAllViews();
                     FragmentManager fragmentManager1 = getSupportFragmentManager();

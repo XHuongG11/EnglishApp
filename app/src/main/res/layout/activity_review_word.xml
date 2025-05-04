@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_learn_by_image"
+    tools:context=".activity.ListenAndWriteActivity">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="40dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cùng ôn lại nào"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+    <!-- Scrollable GridLayout -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <GridLayout
+            android:id="@+id/gridWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:alignmentMode="alignMargins"
+            android:padding="16dp"
+            android:rowOrderPreserved="false" />
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:backgroundTint="@android:color/transparent">
+        <!-- Nút Quay lại -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="90dp"
+            app:backgroundTint="#33000000"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/logout"
+            app:iconGravity="textStart"
+            app:iconSize="22dp" />
+        <!-- Spacer đẩy nút tiếp theo sang phải -->
+        <!-- Nút Kiểm tra -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnXoaTron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:text="Xáo trộn"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:backgroundTint="#ffff00"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -18,44 +18,47 @@
         android:roundIcon="@drawable/logono"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnglishApp"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name=".activity.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.CreatePhrase"
-            android:exported="true" >
+            android:name=".activity.SignUpActivity"
+            android:exported="true">
         </activity>
         <activity
             android:name=".activity.SpeakCheckerActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".learn_new_vocab_finish" -->
-        <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".activity.ReviewWordActivity" -->
-        <!-- android:exported="true" /> -->
+            android:exported="false" />
         <activity
-            android:name=".activity.BaseActivity"
+            android:name=".activity.LearnNewVocabFinishActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ListenAndMatchActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SignUpActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:name=".activity.ReviewWordActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.SignInActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.HomeActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.CreatePhrase"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.LearnWordByImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.WelcomeActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".activity.MainActivity"
             android:exported="false" />
@@ -65,7 +68,6 @@
         <activity
             android:name=".activity.ListenAndWriteActivity"
             android:exported="false" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -10,10 +10,8 @@ import androidx.media3.common.MediaItem;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.exoplayer.ExoPlayer;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -33,6 +31,7 @@ import com.example.englishapp.dao.QuestionDAO;
 import com.example.englishapp.dao.TopicDAO;
 import com.example.englishapp.fragment.CorrectAnswerFragment;
 import com.example.englishapp.fragment.ErrorAnswerFragment;
+import com.example.englishapp.global.GlobalData;
 import com.example.englishapp.model.EPracticeType;
 import com.example.englishapp.model.Practice;
 import com.example.englishapp.model.Question;
@@ -75,7 +74,7 @@ public class ListenAndWriteActivity extends AppCompatActivity {
         practiceDAO = new PracticeDAO();
         progressData.setVisibility(View.VISIBLE);
         TopicDAO topicDAO = new TopicDAO();
-        topicDAO.getByNumberTopic("Topic 1", new OnGetByIdListener<Topic>() {
+        topicDAO.getByNumberTopic(GlobalData.currentTopic, new OnGetByIdListener<Topic>() {
             @Override
             public void onGetByID(Topic topic) {
                 if(topic != null){
@@ -129,8 +128,13 @@ public class ListenAndWriteActivity extends AppCompatActivity {
                             btnCheck.setText("Tiếp theo");
                             btnCheck.setTextColor(Color.parseColor("#FFFFFF"));
                             btnCheck.setOnClickListener(view -> {
-                                if(index < numberQuestion) {
+                                if(index < numberQuestion - 1) {
                                     loadQuestion(index + 1);
+                                }
+                                // nếu hết câu chuyển tiếp
+                                else if(index == numberQuestion - 1){
+                                    Intent intentDirect = new Intent(ListenAndWriteActivity.this, ListenAndMatchActivity.class);
+                                    startActivity(intentDirect);
                                 }
                             });
                         }
@@ -146,8 +150,13 @@ public class ListenAndWriteActivity extends AppCompatActivity {
                             btnCheck.setText("Tiếp theo");
                             btnCheck.setTextColor(Color.parseColor("#FFFFFF"));
                             btnCheck.setOnClickListener(view -> {
-                                if(index < numberQuestion) {
+                                if(index < numberQuestion - 1) {
                                     loadQuestion(index + 1);
+                                }
+                                // nếu hết câu chuyển tiếp
+                                else if(index == numberQuestion - 1){
+                                    Intent intentDirect = new Intent(ListenAndWriteActivity.this, ListenAndMatchActivity.class);
+                                    startActivity(intentDirect);
                                 }
                             });
                         }
