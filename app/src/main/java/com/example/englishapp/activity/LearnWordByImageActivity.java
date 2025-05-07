@@ -124,7 +124,6 @@ public class LearnWordByImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_learn_word_by_image);
 
         WordDAO wordDAO = new WordDAO();
 
@@ -132,6 +131,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
             @Override
             public void onGetAll(List<Word> t) {
                 currentWord = t.get(0);
+                setContentView(R.layout.activity_learn_word_by_image);
                 imageView = findViewById(R.id.illustrationImage);
                 meaningText = findViewById(R.id.meaningText);
                 meaningText.setVisibility(View.GONE);
