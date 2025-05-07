@@ -1,6 +1,7 @@
 package com.example.englishapp.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.example.englishapp.R;
 
 public class ReviewWordActivity extends AppCompatActivity {
 
+    private Button btnXaoTron;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,8 @@ public class ReviewWordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review_word);
         GridLayout gridLayout = findViewById(R.id.gridWords);
         gridLayout.removeAllViews(); // Xoá các nút cũ nếu có
+
+        btnXaoTron = findViewById(R.id.btnXoaTron);
 
         String[][] wordPairs = {
                 {"work", "làm việc"},
@@ -46,6 +50,11 @@ public class ReviewWordActivity extends AppCompatActivity {
             gridLayout.addView(englishBtn);
             gridLayout.addView(vietnameseBtn);
         }
+
+        btnXaoTron.setOnClickListener(v -> {
+            Intent intentDirect = new Intent(ReviewWordActivity.this, CreatePhrase.class);
+            startActivity(intentDirect);
+        });
     }
     private Button createWordButton(Context context, String text) {
         Button button = new Button(context);

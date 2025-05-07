@@ -1,7 +1,11 @@
 package com.example.englishapp.activity;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -110,6 +114,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
     ImageView recorder;
     TextView resultCheckerTextView;
     TextView formattedfeedback;
+    Button btnFinish;
     private PronunciationChecker pronunciationChecker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +129,8 @@ public class LearnWordByImageActivity extends AppCompatActivity {
         speaker = findViewById(R.id.speaker);
         recorder = findViewById(R.id.recorder);
         formattedfeedback = findViewById(R.id.textViewFormattedfeedback);
-
+        btnFinish = findViewById(R.id.btnFinish);
+        btnFinish.setVisibility(INVISIBLE);
 
         TextView swipeHintText = findViewById(R.id.swipeHintText);
         Animation blink = new AlphaAnimation(0.0f, 1.0f);
@@ -140,7 +146,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
                 imageView.animate().rotationY(90).setDuration(200).withEndAction(() -> {
                     imageView.setVisibility(View.GONE);
                     meaningText.setRotationY(-90);
-                    meaningText.setVisibility(View.VISIBLE);
+                    meaningText.setVisibility(VISIBLE);
                     meaningText.animate().rotationY(0).setDuration(200).start();
                 }).start();
                 isBackVisible[0] = true;
@@ -149,7 +155,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
                 meaningText.animate().rotationY(90).setDuration(200).withEndAction(() -> {
                     meaningText.setVisibility(View.GONE);
                     imageView.setRotationY(-90);
-                    imageView.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(VISIBLE);
                     imageView.animate().rotationY(0).setDuration(200).start();
                 }).start();
                 isBackVisible[0] = false;
@@ -161,7 +167,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
                 imageView.animate().rotationY(90).setDuration(200).withEndAction(() -> {
                     imageView.setVisibility(View.GONE);
                     meaningText.setRotationY(-90);
-                    meaningText.setVisibility(View.VISIBLE);
+                    meaningText.setVisibility(VISIBLE);
                     meaningText.animate().rotationY(0).setDuration(200).start();
                 }).start();
                 isBackVisible[0] = true;
@@ -170,7 +176,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
                 meaningText.animate().rotationY(90).setDuration(200).withEndAction(() -> {
                     meaningText.setVisibility(View.GONE);
                     imageView.setRotationY(-90);
-                    imageView.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(VISIBLE);
                     imageView.animate().rotationY(0).setDuration(200).start();
                 }).start();
                 isBackVisible[0] = false;
@@ -184,6 +190,11 @@ public class LearnWordByImageActivity extends AppCompatActivity {
             sound.readText(currentWord.getNoidung());
         });
         setUpRecordWord();
+
+        btnFinish.setOnClickListener(v -> {
+            Intent intentDirect = new Intent(LearnWordByImageActivity.this, ReviewWordActivity.class);
+            startActivity(intentDirect);
+        });
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -232,6 +243,15 @@ public class LearnWordByImageActivity extends AppCompatActivity {
         });
 
     }
+    private void viewButtonFinish(int index){
+        if(index == getWordList().size()-1){
+            // hiện nút hoàn thành
+            btnFinish.setVisibility(VISIBLE);
+        }
+        else {
+            btnFinish.setVisibility(INVISIBLE);
+        }
+    }
     private void showNextWord() {
         if (index < getWordList().size() - 1) {
             index++;
@@ -241,6 +261,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
         }
         currentWord = getWordList().get(index);
         animateTransition(true);
+        viewButtonFinish(index);
     }
 
     private void showPreviousWord() {
@@ -251,6 +272,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
         }
         currentWord = getWordList().get(index);
         animateTransition(false);
+        viewButtonFinish(index);
     }
 
     private void animateTransition(boolean isNext) {
@@ -267,7 +289,7 @@ public class LearnWordByImageActivity extends AppCompatActivity {
             setUpRecordWord();
 
             // Tạo hiệu ứng xuất hiện (mờ dần)
-            currentView.setVisibility(View.VISIBLE);
+            currentView.setVisibility(VISIBLE);
             currentView.setAlpha(0f);
 
             currentView.animate().alpha(1f).setDuration(300).start();

@@ -16,7 +16,9 @@ public class Word {
 
     public Word() {
     }
-
+    public Word(String noidung) {
+        this.noidung = noidung;
+    }
     public Word(Long id, String noidung, String nghia, String phatAm, String cauVidu, String urlImg, List<LearningVocab> nguoiDungDangHoc) {
         this.id = id;
         this.noidung = noidung;

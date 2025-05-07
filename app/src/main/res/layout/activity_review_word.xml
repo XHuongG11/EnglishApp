@@ -70,7 +70,7 @@
         <!-- Spacer đẩy nút tiếp theo sang phải -->
         <!-- Nút Kiểm tra -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCheck"
+            android:id="@+id/btnXoaTron"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="6dp"

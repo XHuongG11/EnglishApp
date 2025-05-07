@@ -1,5 +1,8 @@
 package com.example.englishapp.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.englishapp.R;
+import com.example.englishapp.activity.HomeActivity;
+import com.example.englishapp.activity.LearnWordByImageActivity;
+import com.example.englishapp.global.GlobalData;
 import com.example.englishapp.model.Topic;
 
 import java.util.List;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder> {
+    private Context context;
     private List<Topic> danhSachChuDe;
     private OnTopicClickListener nguoiNghe;
 
@@ -23,7 +30,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         void onTopicClick(Topic chuDe);
     }
 
-    public TopicAdapter(List<Topic> danhSachChuDe, OnTopicClickListener nguoiNghe) {
+    public TopicAdapter(Context context, List<Topic> danhSachChuDe, OnTopicClickListener nguoiNghe) {
+        this.context = context;
         this.danhSachChuDe = danhSachChuDe;
         this.nguoiNghe = nguoiNghe;
     }
@@ -39,6 +47,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     public void onBindViewHolder(@NonNull TopicViewHolder holder, int position) {
         Topic chuDe = danhSachChuDe.get(position);
         holder.bind(chuDe);
+        holder.itemView.findViewById(R.id.btn_start).setOnClickListener(v -> {
+            Intent intent = new Intent(context, LearnWordByImageActivity.class);
+            GlobalData.currentTopic = chuDe.getNumberTopic();
+            Log.d("DEBUG ", GlobalData.currentTopic);
+            context.startActivity(intent);
+        });
     }
 
     @Override

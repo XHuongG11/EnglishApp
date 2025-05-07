@@ -1,25 +1,25 @@
 package com.example.englishapp.activity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.englishapp.R;
-import com.example.englishapp.dao.QuestionDAO;
 import com.example.englishapp.fragment.CorrectAnswerFragment;
 import com.example.englishapp.fragment.ErrorAnswerFragment;
 import com.example.englishapp.model.Question;
 import com.google.android.material.button.MaterialButton;
-
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,23 +31,27 @@ public class CreatePhrase extends AppCompatActivity {
     private int currentQuestionIndex = 0;
     private MaterialButton btnCheck;
     private Button btnWord1, btnWord2, btnWord3;
-    private QuestionDAO questionDAO; // Thay WordDAO bằng QuestionDAO
+    private TextView vanBanPhu;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_phrase);
 
+        // Khởi tạo các thành phần giao diện
         btnWord1 = findViewById(R.id.btn_word_1);
         btnWord2 = findViewById(R.id.btn_word_2);
         btnWord3 = findViewById(R.id.btn_word_3);
         btnCheck = findViewById(R.id.btnCheck);
         FrameLayout fragmentFeedback = findViewById(R.id.fragmentFeedback);
         FrameLayout fragmentFeedback1 = findViewById(R.id.fragmentFeedback1);
-        TextView vanBanPhu = findViewById(R.id.van_ban_phu);
+        vanBanPhu = findViewById(R.id.van_ban_phu);
 
-        questionDAO = new QuestionDAO();
+        // Khởi tạo Firestore
+        db = FirebaseFirestore.getInstance();
 
+        // Khởi tạo layout chứa các từ được chọn
         layoutPhraseContainer = new LinearLayout(this);
         layoutPhraseContainer.setLayoutParams(new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
@@ -57,12 +61,10 @@ public class CreatePhrase extends AppCompatActivity {
         layoutPhraseContainer.setPadding(16, 16, 16, 16);
         fragmentFeedback.addView(layoutPhraseContainer);
 
+        // Khởi tạo danh sách câu hỏi
         questions = new ArrayList<>();
-        getDatabase();
 
-        loadQuestion(currentQuestionIndex);
-        updateCheckButtonState();
-
+        // Thiết lập sự kiện click cho các nút
         btnWord1.setOnClickListener(v -> {
             animateButtonUp(btnWord1);
             addWordToPhraseFrom(btnWord1);
@@ -80,49 +82,92 @@ public class CreatePhrase extends AppCompatActivity {
             addWordToPhraseFrom(btnWord3);
             updateCheckButtonState();
         });
+
+        // Tải dữ liệu từ Firestore
+        getDatabase();
     }
 
     private void getDatabase() {
-        // Lấy danh sách câu hỏi từ QuestionDAO
-        questions = questionDAO.getAll();
-        if (questions.isEmpty()) {
-            finish();
-            return;
-        }
+        // Lấy dữ liệu từ Firestore
+        db.collection("questions")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        questions.clear();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Long id = document.getLong("id");
+                            String content = document.getString("content");
+                            String meaning = document.getString("meaning");
+
+                            // Log dữ liệu của từng document để debug
+                            Log.d("FIREBASE", "Document: id=" + id + ", content=" + content + ", meaning=" + meaning);
+
+                            if (content != null && meaning != null) {
+                                Question question = new Question(id, content, meaning, null, null);
+                                questions.add(question);
+                            } else {
+                                Log.w("FIREBASE", "Bỏ qua document vì content hoặc meaning là null");
+                            }
+                        }
+
+                        // Log số lượng câu hỏi sau khi xử lý
+                        Log.d("FIREBASE", "Lấy dữ liệu thành công. Số câu hỏi: " + questions.size());
+
+                        if (questions.isEmpty()) {
+                            Log.w("FIREBASE", "Danh sách câu hỏi trống. Kết thúc activity.");
+                            finish();
+                            return;
+                        }
+
+                        // Tải câu hỏi đầu tiên và cập nhật trạng thái nút kiểm tra sau khi lấy dữ liệu
+                        loadQuestion(currentQuestionIndex);
+                        updateCheckButtonState();
+                    } else {
+                        // Xử lý lỗi
+                        Log.e("FIREBASE", "Lỗi khi lấy dữ liệu từ Firestore", task.getException());
+                        finish();
+                    }
+                });
     }
 
     private void loadQuestion(int index) {
         if (index >= questions.size()) {
+            Log.w("FIREBASE", "Index vượt quá kích thước danh sách: " + index);
             finish();
+            // hiện trang hoàn thành bài học
+            Intent intentDirect = new Intent(CreatePhrase.this, ListenAndWriteActivity.class);
+            startActivity(intentDirect);
             return;
         }
 
         currentQuestionIndex = index;
         Question question = questions.get(index);
-        TextView vanBanPhu = findViewById(R.id.van_ban_phu);
 
+        // Log dữ liệu câu hỏi để debug
+        Log.d("FIREBASE", "Tải câu hỏi: " + question.getContent() + ", meaning: " + question.getMeaning());
+
+        // Hiển thị nghĩa của câu hỏi
         vanBanPhu.setText(question.getMeaning());
 
+        // Reset vị trí các nút và xóa các từ đã chọn trước đó
         btnWord1.setTranslationY(0);
         btnWord2.setTranslationY(0);
         btnWord3.setTranslationY(0);
         layoutPhraseContainer.removeAllViews();
 
+        // Chia câu hỏi thành các phần (units)
         String[] words = question.getContent().split(" ");
         List<String> units = new ArrayList<>();
 
         if (words.length == 5) {
-            // Câu 5 từ: 1 từ, 2 từ, 2 từ
-            units.add(words[0]); // Từ 1
-            units.add(words[1] + " " + words[2]); // Từ 2-3
-            units.add(words[3] + " " + words[4]); // Từ 4-5
+            units.add(words[0]);
+            units.add(words[1] + " " + words[2]);
+            units.add(words[3] + " " + words[4]);
         } else if (words.length >= 6) {
-            // Câu 6 từ trở lên: 2 từ, 2 từ, 2 từ
-            units.add(words[0] + " " + words[1]); // Từ 1-2
-            units.add(words[2] + " " + words[3]); // Từ 3-4
-            units.add(words[4] + " " + words[5]); // Từ 5-6
+            units.add(words[0] + " " + words[1]);
+            units.add(words[2] + " " + words[3]);
+            units.add(words[4] + " " + words[5]);
         } else {
-            // Câu dưới 5 từ: logic cũ
             if (words.length > 0) units.add(words[0]);
             if (words.length > 1) units.add(words[1]);
             if (words.length > 2) {
@@ -135,14 +180,23 @@ public class CreatePhrase extends AppCompatActivity {
             }
         }
 
+        // Xáo trộn các phần để hiển thị ngẫu nhiên
         Collections.shuffle(units);
 
-        btnWord1.setText(units.size() > 0 ? units.get(0) : "");
-        btnWord2.setText(units.size() > 1 ? units.get(1) : "");
-        btnWord3.setText(units.size() > 2 ? units.get(2) : "");
+        // Hiển thị các phần lên các nút và log để debug
+        String word1 = units.size() > 0 ? units.get(0) : "";
+        String word2 = units.size() > 1 ? units.get(1) : "";
+        String word3 = units.size() > 2 ? units.get(2) : "";
+        Log.d("FIREBASE", "Hiển thị các từ: word1=" + word1 + ", word2=" + word2 + ", word3=" + word3);
 
+        btnWord1.setText(word1);
+        btnWord2.setText(word2);
+        btnWord3.setText(word3);
+
+        // Cập nhật trạng thái nút kiểm tra
         updateCheckButtonState();
 
+        // Xóa fragment phản hồi nếu có
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (fragmentManager.findFragmentById(R.id.fragmentFeedback1) != null) {

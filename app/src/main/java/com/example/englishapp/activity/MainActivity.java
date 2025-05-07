@@ -14,13 +14,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UserDAO userDAO = new UserDAO();
-        userDAO.getByID("vYUbgAInoovmmqVNkpJO",(user) -> {
-            if(user != null){
-                Log.w("USER_INFO",user.getEmail()+user.getPassword()+user.getUsername());
-            }else{
-                Log.w("USER_INFO","Error");
-            }
-        });
+//        UserDAO userDAO = new UserDAO();
+//        userDAO.getByID("vYUbgAInoovmmqVNkpJO",(user) -> {
+//            if(user != null){
+//                Log.w("USER_INFO",user.getEmail()+user.getPassword()+user.getUsername());
+//            }else{
+//                Log.w("USER_INFO","Error");
+//            }
+//        });
     }
 }

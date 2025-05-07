@@ -1,7 +1,10 @@
 package com.example.englishapp.dao;
 
+import android.util.Log;
+
 import com.example.englishapp.model.Question;
 import com.example.englishapp.model.Word;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,43 +43,43 @@ public class QuestionDAO {
     }
 
     // Thêm câu hỏi mới
-    public boolean create(Question question) {
-        if (question == null) return false;
-
-        question.setId(nextId++); // Gán ID tự động
-        questions.add(question);
-        return true;
-    }
-
-    // Lấy câu hỏi theo ID
-    public Question getByID(Question question) {
-        if (question == null || question.getId() == null) return null;
-
-        for (Question q : questions) {
-            if (q.getId().equals(question.getId())) {
-                return q;
-            }
-        }
-        return null;
-    }
-
-    // Lấy tất cả câu hỏi
-    public List<Question> getAll() {
-        return new ArrayList<>(questions); // Trả về bản sao để tránh sửa đổi trực tiếp
-    }
-
-    // Cập nhật thông tin câu hỏi
-    public boolean update(Question question) {
-        if (question == null || question.getId() == null) return false;
-
-        for (int i = 0; i < questions.size(); i++) {
-            if (questions.get(i).getId().equals(question.getId())) {
-                questions.set(i, question);
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean create(Question question) {
+//        if (question == null) return false;
+//
+//        question.setId(nextId++); // Gán ID tự động
+//        questions.add(question);
+//        return true;
+//    }
+//
+//    // Lấy câu hỏi theo ID
+//    public Question getByID(Question question) {
+//        if (question == null || question.getId() == null) return null;
+//
+//        for (Question q : questions) {
+//            if (q.getId().equals(question.getId())) {
+//                return q;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    // Lấy tất cả câu hỏi
+//    public List<Question> getAll() {
+//        return new ArrayList<>(questions); // Trả về bản sao để tránh sửa đổi trực tiếp
+//    }
+//
+//    // Cập nhật thông tin câu hỏi
+//    public boolean update(Question question) {
+//        if (question == null || question.getId() == null) return false;
+//
+//        for (int i = 0; i < questions.size(); i++) {
+//            if (questions.get(i).getId().equals(question.getId())) {
+//                questions.set(i, question);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     // Xóa câu hỏi
     public boolean delete(Question question) {
@@ -84,4 +87,87 @@ public class QuestionDAO {
 
         return questions.removeIf(q -> q.getId().equals(question.getId()));
     }
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    public void create(Question question, OnSaveUpdateListener listener) {
+        try {
+            db.collection("questions")
+                    .document(question.getId().toString())
+                    .set(question)
+                    .addOnSuccessListener(documentReference -> {
+                        listener.onComplete(true);
+                        Log.d("Firebase", "Success saving question");
+                    })
+                    .addOnFailureListener(e -> {
+                        listener.onComplete(false);
+                        Log.w("Firebase", "Error saving question", e);
+                    });
+        } catch (Exception ex) {
+            Log.e("CREATE_QUESTION", ex.getMessage());
+        }
+    }
+
+    public void getByID(String questionID, OnGetByIdListener<Question> listener) {
+        db.collection("questions")
+                .document(questionID)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Question question = documentSnapshot.toObject(Question.class);
+                        listener.onGetByID(question);
+                    } else {
+                        listener.onGetByID(null);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firebase", "Error getting question by ID", e);
+                    listener.onGetByID(null);
+                });
+    }
+
+    public void getAll(OnGetAllListener<Question> listener) {
+        db.collection("questions")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        List<Question> questionList = queryDocumentSnapshots.toObjects(Question.class);
+                        listener.onGetAll(questionList);
+                    } else {
+                        listener.onGetAll(Collections.emptyList());
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firebase", "Error getting all questions", e);
+                    listener.onGetAll(Collections.emptyList());
+                });
+    }
+
+    public void update(String id, Question question, OnSaveUpdateListener listener) {
+        db.collection("questions")
+                .document(id)
+                .set(question)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Firebase", "Question updated successfully");
+                    listener.onComplete(true);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firebase", "Error updating question", e);
+                    listener.onComplete(false);
+                });
+    }
+
+    public void delete(String id, OnSaveUpdateListener listener) {
+        db.collection("questions")
+                .document(id)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Firebase", "Question deleted successfully");
+                    listener.onComplete(true);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firebase", "Error deleting question", e);
+                    listener.onComplete(false);
+                });
+    }
+
 }
