@@ -39,6 +39,7 @@ import com.example.englishapp.model.Topic;
 import com.example.englishapp.model.Word;
 import com.example.englishapp.util.Sound;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;

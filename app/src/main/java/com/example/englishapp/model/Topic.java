@@ -8,12 +8,12 @@ public class Topic {
     private String numberTopic;
     private String name;
     private List<Practice> practices;
-    private int backgroundResource; // Thêm thuộc tính để lưu ID tài nguyên background
+    private String backgroundResource; // Thêm thuộc tính để lưu ID tài nguyên background
 
     public Topic() {
     }
 
-    public Topic(String numberTopic, String name, List<Practice> practices, int backgroundResource) {
+    public Topic(String numberTopic, String name, List<Practice> practices, String backgroundResource) {
         this.numberTopic = numberTopic;
         this.name = name;
         this.practices = practices;
@@ -40,7 +40,7 @@ public class Topic {
         this.practices = practices;
     }
 
-    public int getBackgroundResource() {
+    public String getBackgroundResource() {
         return backgroundResource;
     }
 }
