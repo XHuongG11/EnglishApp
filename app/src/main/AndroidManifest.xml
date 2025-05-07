@@ -31,12 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.ListenAndMatchActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".activity.ReviewWordActivity"
             android:exported="false" />
@@ -55,7 +50,12 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.LearnWordByImageActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.WelcomeActivity"
             android:exported="true"/>

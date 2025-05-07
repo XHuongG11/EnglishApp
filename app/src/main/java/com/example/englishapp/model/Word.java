@@ -28,6 +28,14 @@ public class Word {
         this.urlImg = urlImg;
         this.nguoiDungDangHoc = nguoiDungDangHoc;
     }
+    public Word(Long id, String noidung, String nghia, String phatAm, String cauVidu, String urlImg) {
+        this.id = id;
+        this.noidung = noidung;
+        this.nghia = nghia;
+        this.phatAm = phatAm;
+        this.cauVidu = cauVidu;
+        this.urlImg = urlImg;
+    }
 
     public Long getId() {
         return id;
