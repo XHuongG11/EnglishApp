@@ -2,6 +2,8 @@ package com.example.englishapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
 import com.example.englishapp.R;
 import com.example.englishapp.activity.HomeActivity;
 import com.example.englishapp.activity.LearnWordByImageActivity;
@@ -75,7 +80,18 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         }
 
         public void bind(Topic chuDe) {
-            layoutTopicCard.setBackgroundResource(chuDe.getBackgroundResource());
+            Glide.with(context)
+                    .load(chuDe.getBackgroundResource())
+                    .into(new CustomTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable com.bumptech.glide.request.transition.Transition<? super Drawable> transition) {
+                            layoutTopicCard.setBackground(resource);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                        }
+                    });
             tvNumberTopic.setText(chuDe.getNumberTopic());
             tvName.setText(chuDe.getName());
            // btnStart.setOnClickListener(v -> nguoiNghe.onTopicClick(chuDe));
