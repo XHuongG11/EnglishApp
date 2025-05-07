@@ -228,19 +228,16 @@ public class ListenAndMatchActivity extends AppCompatActivity {
         Long nextPracticeId = 1L;
 
         // Chủ đề 1: Thì hiện tại đơn: Câu khẳng định
-        Topic topic1 = new Topic("Topic " + nextTopicId++, "Thì hiện tại đơn: Câu khẳng định", null, R.drawable.lesson_card_background);
+        Topic topic1 = new Topic("Topic " + nextTopicId++, "Thì hiện tại đơn: Câu khẳng định", null,"https://res.cloudinary.com/duknvzvix/image/upload/v1746336650/lesson_card_background_uchqcn.png");
         topics.add(topic1);
 
         // Chủ đề 2: Danh từ số nhiều
-        Topic topic2 = new Topic("Topic " + nextTopicId++, "Danh từ số nhiều", null, R.drawable.lesson_card_background2);
+        Topic topic2 = new Topic("Topic " + nextTopicId++, "Danh từ số nhiều", null, "https://res.cloudinary.com/duknvzvix/image/upload/v1746336650/lesson_card_background2_jlteuq.png");
         topics.add(topic2);
 
         // Chủ đề 3: Thì hiện tại đơn: Câu nghi vấn
-        Topic topic3 = new Topic("Topic " + nextTopicId++, "Thì hiện tại đơn: Câu nghi vấn", null, R.drawable.lesson_card_background3);
-        topics.add(topic3);
-
-        // Chủ đề 4: Thì hiện tại đơn: Câu phủ định
-        Topic topic4 = new Topic("Topic " + nextTopicId++, "Thì hiện tại đơn: Câu phủ định", null, R.drawable.lesson_card_background4);
+        Topic topic3 = new Topic("Topic " + nextTopicId++, "Thì hiện tại đơn: Câu nghi vấn", null, "https://res.cloudinary.com/duknvzvix/image/upload/v1746336650/lesson_card_background3_q5zgl3.png");
+        Topic topic4 = new Topic("Topic " + nextTopicId++, "Thì hiện tại đơn: Câu phủ định", null, "https://res.cloudinary.com/duknvzvix/image/upload/v1746336650/lesson_card_background5_fp8ywi.png");
         topics.add(topic4);
 
         TopicDAO topicDAO = new TopicDAO();

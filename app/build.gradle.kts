@@ -72,6 +72,8 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.09.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
