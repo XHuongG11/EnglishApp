@@ -14,12 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.englishapp.R;
+import com.example.englishapp.dao.OnGetAllListener;
+import com.example.englishapp.dao.OnGetByIdListener;
+import com.example.englishapp.dao.PracticeDAO;
+import com.example.englishapp.dao.QuestionDAO;
+import com.example.englishapp.dao.TopicDAO;
 import com.example.englishapp.fragment.CorrectAnswerFragment;
 import com.example.englishapp.fragment.ErrorAnswerFragment;
+import com.example.englishapp.global.GlobalData;
+import com.example.englishapp.model.EPracticeType;
+import com.example.englishapp.model.Practice;
 import com.example.englishapp.model.Question;
+import com.example.englishapp.model.Topic;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +39,7 @@ public class CreatePhrase extends AppCompatActivity {
     private MaterialButton btnCheck;
     private Button btnWord1, btnWord2, btnWord3;
     private TextView vanBanPhu;
-    private FirebaseFirestore db;
+    private PracticeDAO practiceDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +55,8 @@ public class CreatePhrase extends AppCompatActivity {
         FrameLayout fragmentFeedback1 = findViewById(R.id.fragmentFeedback1);
         vanBanPhu = findViewById(R.id.van_ban_phu);
 
-        // Khởi tạo Firestore
-        db = FirebaseFirestore.getInstance();
+        // Khởi tạo PracticeDAO
+        practiceDAO = new PracticeDAO();
 
         // Khởi tạo layout chứa các từ được chọn
         layoutPhraseContainer = new LinearLayout(this);
@@ -83,60 +90,127 @@ public class CreatePhrase extends AppCompatActivity {
             updateCheckButtonState();
         });
 
-        // Tải dữ liệu từ Firestore
-        getDatabase();
+        // Tải dữ liệu
+        TopicDAO topicDAO = new TopicDAO();
+        topicDAO.getByNumberTopic(GlobalData.currentTopic, new OnGetByIdListener<Topic>() {
+            @Override
+            public void onGetByID(Topic topic) {
+                if (topic != null) {
+                    Log.d("DEBUG", "topic");
+                    getDatabase(topic);
+                } else {
+                    Log.w("FIREBASE", "Topic is null for currentTopic: " + GlobalData.currentTopic);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onGetFailed(Exception e) {
+                Log.e("FIREBASE", "Lỗi khi lấy dữ liệu topic", e);
+                finish();
+            }
+        });
+
+        // Khởi tạo dữ liệu câu hỏi
+        // initData();
     }
 
-    private void getDatabase() {
-        // Lấy dữ liệu từ Firestore
-        db.collection("questions")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        questions.clear();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Long id = document.getLong("id");
-                            String content = document.getString("content");
-                            String meaning = document.getString("meaning");
+    private void initData() {
+        QuestionDAO questionDAO = new QuestionDAO();
+        List<Question> questions = new ArrayList<>();
 
-                            // Log dữ liệu của từng document để debug
-                            Log.d("FIREBASE", "Document: id=" + id + ", content=" + content + ", meaning=" + meaning);
+        // Câu 1
+        questions.add(new Question(11L, "I am happy", "Tôi đang hạnh phúc", null, null));
 
-                            if (content != null && meaning != null) {
-                                Question question = new Question(id, content, meaning, null, null);
-                                questions.add(question);
-                            } else {
-                                Log.w("FIREBASE", "Bỏ qua document vì content hoặc meaning là null");
-                            }
+        // Câu 2
+        questions.add(new Question(12L, "She is singing", "Cô ấy đang hát", null, null));
+
+        // Câu 3
+        questions.add(new Question(13L, "He runs fast", "Anh ấy chạy nhanh", null, null));
+
+        // Câu 4
+        questions.add(new Question(14L, "They are friends", "Họ là bạn bè", null, null));
+
+        // Câu 5
+        questions.add(new Question(15L, "We play games", "Chúng tôi chơi trò chơi", null, null));
+
+        // Lưu các câu hỏi vào Firestore
+        for (Question q : questions) {
+            questionDAO.create(q, success -> {
+                if (success) {
+                    Log.d("CREATE_QUESTION", "Question saved successfully");
+                } else {
+                    Log.e("CREATE_QUESTION", "Failed to save question");
+                }
+            });
+        }
+
+        // Sau khi lưu các câu hỏi, lưu Practice
+        TopicDAO topicDAO = new TopicDAO();
+        topicDAO.getByNumberTopic("Topic 1", new OnGetByIdListener<Topic>() {
+            @Override
+            public void onGetByID(Topic topic) {
+                if (topic != null) {
+                    Practice practice = new Practice(3L, EPracticeType.GHEPTU, topic, questions);
+                    PracticeDAO practiceDAO = new PracticeDAO();
+                    practiceDAO.create(practice, isSuccess -> {
+                        if (isSuccess) {
+                            Log.d("CREATE_PRACTICE", "Practice saved successfully");
+                        } else {
+                            Log.e("CREATE_PRACTICE", "Failed to save practice");
                         }
+                    });
+                }
+            }
 
-                        // Log số lượng câu hỏi sau khi xử lý
-                        Log.d("FIREBASE", "Lấy dữ liệu thành công. Số câu hỏi: " + questions.size());
+            @Override
+            public void onGetFailed(Exception e) {
+                Log.e("CREATE_PRACTICE", "Failed to get topic", e);
+            }
+        });
+    }
 
-                        if (questions.isEmpty()) {
-                            Log.w("FIREBASE", "Danh sách câu hỏi trống. Kết thúc activity.");
-                            finish();
-                            return;
-                        }
-
-                        // Tải câu hỏi đầu tiên và cập nhật trạng thái nút kiểm tra sau khi lấy dữ liệu
-                        loadQuestion(currentQuestionIndex);
-                        updateCheckButtonState();
-                    } else {
-                        // Xử lý lỗi
-                        Log.e("FIREBASE", "Lỗi khi lấy dữ liệu từ Firestore", task.getException());
+    private void getDatabase(Topic topic) {
+        Log.d("FIREBASE", "Fetching practices for topic: " + topic.getNumberTopic());
+        practiceDAO.getByNumberTopic(topic.getNumberTopic(), new OnGetAllListener<Practice>() {
+            @Override
+            public void onGetAll(List<Practice> practices) {
+                Log.d("FIREBASE", "Retrieved " + practices.size() + " practices");
+                Practice practice = practices.stream()
+                        .filter(p -> p.getType().equals(EPracticeType.GHEPTU))
+                        .findFirst()
+                        .orElse(null);
+                if (practice != null) {
+                    questions.clear();
+                    questions.addAll(practice.getQuestions());
+                    Log.d("FIREBASE", "Lấy dữ liệu thành công. Số câu hỏi: " + questions.size());
+                    if (questions.isEmpty()) {
+                        Log.w("FIREBASE", "Danh sách câu hỏi trống. Kết thúc activity.");
                         finish();
+                        return;
                     }
-                });
+                    loadQuestion(currentQuestionIndex);
+                    updateCheckButtonState();
+                } else {
+                    Log.w("FIREBASE", "Không tìm thấy practice phù hợp.");
+                    finish();
+                }
+            }
+
+            @Override
+            public void onGetFailed(Exception e) {
+                Log.e("FIREBASE", "Lỗi khi lấy dữ liệu practice", e);
+                finish();
+            }
+        });
     }
 
     private void loadQuestion(int index) {
         if (index >= questions.size()) {
             Log.w("FIREBASE", "Index vượt quá kích thước danh sách: " + index);
-            finish();
-            // hiện trang hoàn thành bài học
             Intent intentDirect = new Intent(CreatePhrase.this, ListenAndWriteActivity.class);
             startActivity(intentDirect);
+            finish();
             return;
         }
 
