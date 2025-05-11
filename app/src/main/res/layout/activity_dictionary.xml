@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_dictionary"
+    android:padding="24dp">
+
+    <!-- Thanh tìm kiếm tùy chỉnh -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_box_bg"
+        android:padding="8dp"
+        android:layout_marginBottom="24dp">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Nhập từ cần tra"
+            android:background="@android:color/transparent"
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            android:paddingEnd="48dp"
+            android:inputType="text" />
+
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/search"
+            android:contentDescription="Tìm kiếm"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
+
+    <!-- Vùng hiển thị kết quả -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

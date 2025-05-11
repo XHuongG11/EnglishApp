@@ -2,6 +2,8 @@ package com.example.englishapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -64,6 +66,16 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onGetFailed(Exception e) {
 
+            }
+        });
+        ImageView imgLesson = findViewById(R.id.imgLesson);
+        // Set sự kiện click cho ImageView
+        imgLesson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo một Intent để chuyển sang NoteBookActivity
+                Intent intent = new Intent(HomeActivity.this, NoteBookActivity.class);
+                startActivity(intent);
             }
         });
 

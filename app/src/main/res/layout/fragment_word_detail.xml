@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_frgdictionary">
+
+    <TextView
+        android:id="@+id/tvWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Word"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/tvPronounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="22sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tvMeanings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Meanings"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF" />
+    <TextView
+        android:id="@+id/tvDefinitions1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Definitions:"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF" />
+    <TextView
+        android:id="@+id/tvDefinitions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Definitions"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tvType1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type:"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/vidu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Example sentences:"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/tvExamples"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btnAddToNotebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Thêm vào sổ tay"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#359FEF"
+        android:padding="14dp"
+        android:textSize="16sp" />
+
+</LinearLayout>
